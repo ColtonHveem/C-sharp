@@ -1,0 +1,99 @@
+﻿/*
+ * CSC205 Week7 Programming Assignment #1
+ * key concepts: abstract class/method; inheritance; constructor; array of objects
+ * Shape class: Shape.cs
+ */
+
+using System;
+
+public abstract class Shape
+{
+    public abstract double Area();
+    public static double GetArea(Shape shape)
+    {
+        return shape.Area();
+    }
+}
+
+public class Square : Shape
+{
+    private double size;
+    public Square(double length)
+    {
+        this.size = length;
+    }
+    public override double Area()
+    {
+        return Math.Pow(size, 2);
+    }
+}
+
+public class Circle : Shape
+{
+    private double radius;
+    public Circle(double radius)
+    {
+        this.radius = radius;
+    }
+    public override double Area()
+    {
+        return Math.Round(Math.PI * Math.Pow(radius, 2), 2);
+    }
+}
+public class Rectangle : Shape
+{
+    private double length, width;
+    public Rectangle(double length, double width)
+    {
+        this.length = length;
+        this.width = width;
+    }
+    public override double Area()
+    {
+        return (length * width);
+    }
+}
+public class Triangle : Shape
+{
+    private double tribase, height;
+    public Triangle(double tribase, double height)
+    {
+        this.tribase = tribase;
+        this.height = height;
+    }
+    public override double Area()
+    {
+        return ((tribase * height)/2);
+    }
+}
+
+
+/*
+ * CSC205 Week7 Programming Assignment #1
+ * key concepts: abstract class/method; inheritance; constructor; array of objects
+ * Tester: Program.cs
+ */
+
+public class Program
+{
+    public static void Main()
+    {
+        Shape[] shapes = { new Square(10), new Circle(10), new Rectangle(5,8.5), new Triangle(5,10) };
+        foreach (var shape in shapes)
+        {
+            Console.WriteLine($"Area of {shape}: {shape.Area()}");
+            Console.WriteLine($"Area of {shape}: {Shape.GetArea(shape)}, again");
+        }
+    }
+}
+
+/* 
+Github Lines Explanation:
+Line 11: Sets a default method called Area for the abstract class shape. This method can later be referenced for particular shapes and appended to fit the area formula based upon the shape.
+Line 40: Overrides the method called Area to fit the particular equation to find the area of a circle.
+    - Math.Round rounds the solution of the equation to a specific decimal point, which is later declared as 2 decimal points at the end of the formula.
+    - The area of a circle is defined as Math.Pi (mathematical constant pi) * Math.Pow(radius,2) which is the radius raised to the second power.
+Line 55: Declares new array called shapes belonging to the Abstract Class Shape. The array contains two items. 
+    - The first item is a new object belonging to the class Square with a length of 10.
+    - The second item is a new object belonging to the class Circle with a radius of 10.
+*/
