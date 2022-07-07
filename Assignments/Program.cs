@@ -1,0 +1,30 @@
+﻿using System;
+public class Program
+{
+    public static void Numbers(int x)
+    {
+        int y = x;
+        int max = x;
+        while (x >= 1)
+        {
+            int count = x;
+            while (count < max)
+            {
+                Console.Write(" ");
+                count = count + 1;
+            }
+            while (y >= 1)
+            {
+                Console.Write(x);
+                y = y - 1;
+            }
+            x = x - 1;
+            y = x;
+            Console.WriteLine();
+        }
+    }
+    public static void Main()
+    {
+        Numbers(5);
+    }
+}
