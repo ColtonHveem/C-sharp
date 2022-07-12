@@ -1,0 +1,117 @@
+public static void Experiment()
+        {
+            int milliseconds = 2000;
+            int milliseconds2 = 4000;
+
+            Animal favorite = GetAnimal();
+            double favMaxSize = (favorite.Size * 1.1);
+            double favMinSize = (favorite.Size * .9);
+            double favMaxSpeed = (favorite.Speed * 1.1);
+            double favMinSpeed = (favorite.Speed * .9);
+
+            IDictionary<string, Animal> Zoo = CreateZoo();
+
+            Console.Write("Enter Question: ");
+            string question = Console.ReadLine();
+            question = question.ToLower();
+
+            string findanimal = question.Split(' ').Last();          
+            //string questionbase = question.Remove(question.Length - findanimal.Length); -- possibly useful in the future            
+            findanimal = findanimal.Trim('?');
+            //findanimal = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(findanimal); -- working with casing of letters (uppercase first letter of words)
+            Console.WriteLine(findanimal);
+            Console.WriteLine(favorite);
+
+            if (question == $"is it faster than a {findanimal}?" || question == $"faster than {findanimal}?")
+            {
+                if (favMinSpeed > Zoo[findanimal].Speed)
+                {
+                    Console.WriteLine("Answer: Yes");
+                    Console.WriteLine();
+                }
+                else if (favMaxSpeed < Zoo[findanimal].Speed)
+                {
+                    Console.WriteLine("Answer: No");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine("It's about the same speed");
+                    Console.WriteLine();
+                }
+            }
+            if (question == $"is it slower than a {findanimal}?" || question == $"slower than {findanimal}?")
+            {
+                if (favMaxSpeed < Zoo[findanimal].Speed)
+                {
+                    Console.WriteLine("Answer: Yes");
+                    Console.WriteLine();
+                }
+                else if (favMinSpeed > Zoo[findanimal].Speed)
+                {
+                    Console.WriteLine("Answer: No");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine("It's about the same speed");
+                    Console.WriteLine();
+                }
+            }
+            if (question == $"is it larger than a {findanimal}?" || question == $"larger than {findanimal}?")
+            {
+                if (favMinSize > Zoo[findanimal].Size)
+                {
+                    Console.WriteLine("Answer: Yes");
+                    Console.WriteLine();
+                }
+                else if (favMaxSize < Zoo[findanimal].Size)
+                {
+                    Console.WriteLine("Answer: No");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine("It's about the same speed");
+                    Console.WriteLine();
+                }
+            }
+            if (question == $"is it smaller than a {findanimal}?" || question == $"smaller than {findanimal}?")
+            {
+                if (favMaxSize < Zoo[findanimal].Size)
+                {
+                    Console.WriteLine("Answer: Yes");
+                    Console.WriteLine();
+                }
+                else if (favMinSize > Zoo[findanimal].Size)
+                {
+                    Console.WriteLine("Answer: No");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine("It's about the same speed");
+                    Console.WriteLine();
+                }
+            }
+            /*possibly useful in the future
+            if (questionbase == "is it slower than a" || questionbase == "slower than");
+            {
+                if (favMaxSpeed < Zoo[findanimal].Speed)
+                {
+                    Console.WriteLine("Answer: Yes");
+                    Console.WriteLine();
+                }
+                else if (favMinSpeed > Zoo[findanimal].Speed)
+                {
+                    Console.WriteLine("Answer: No");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine("It's about the same speed");
+                    Console.WriteLine();
+                }
+            }
+            */
+        }
