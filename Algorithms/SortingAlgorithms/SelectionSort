@@ -1,0 +1,29 @@
+// Selection sort example
+using System;
+class Program {
+   static void Main(string[] args) {
+   int[] a = { 3, 2, 5, 1, 0 };
+     Console.WriteLine("The original array: 3 2 5 1 0");
+     SelectionSort(a);
+     Console.Write("The sorted array:   ");
+     foreach (int i in a)
+       Console.Write(i + " ");
+    }
+
+    static void SelectionSort(int[] arr) {
+        int minIndex, tmp;
+        for (int i = 0; i < arr.Length; i++) {
+            minIndex = i;
+            for (int j = i; j < arr.Length; j++)
+            {
+                if (arr[j] < arr[minIndex])
+                {
+                    minIndex = j;
+                }
+            }
+            tmp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = tmp;
+        }
+    } //end of SelectionSort
+}
