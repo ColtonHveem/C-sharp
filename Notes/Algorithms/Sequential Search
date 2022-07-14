@@ -1,0 +1,6 @@
+static int SequentialSearch(int[] arr, int key) {
+        int ret = -1;
+        for (int index = 0; index < arr.Length && ret == -1; index++)
+            if (arr[index] == key)
+                ret = index;
+        return ret;
