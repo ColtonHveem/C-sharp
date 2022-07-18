@@ -1,0 +1,35 @@
+// Merge sort example
+using System;
+class Program {
+    static void Main(string[] args) {
+        int[] a = { 3, 2, 5, 1, 0 };
+        Console.WriteLine("The original array: 3 2 5 1 0");
+        MergeSort(a, 0, a.Length - 1);
+        Console.Write("The sorted array:   ");
+        foreach (int i in a) { Console.Write(i + " "); }
+    }
+    static void MergeSort(int[] arr, int left, int right) {
+        if (left < right) {
+            int mid = (left + right) / 2;
+            MergeSort(arr, left, mid);
+            MergeSort(arr, mid + 1, right);
+            Merge(arr, left, mid, right); 
+        }
+    }
+    static void Merge(int[] arr, int left, int mid, int right) {
+        int[] m = new int[right - left + 1];
+        int i = left, j = mid + 1, k = 0;
+        while (i <= mid && j <= right) {
+            if (arr[i] < arr[j]) {
+                m[k++] = arr[i++];
+            } else {
+                m[k++] = arr[j++];
+            }
+        }
+        while (i <= mid) { m[k++] = arr[i++]; }
+        while (j <= right) { m[k++] = arr[j++]; }
+        for (int index = 0; index < m.Length; index++) {
+            arr[left + index] = m[index];
+        }
+    }
+}
