@@ -1,0 +1,195 @@
+using System;
+
+namespace LinkedListMerge
+{
+    public class Node
+    {
+        internal Node Next;
+        internal int Value;
+        public Node(int num)
+        {
+            Value = num;
+            Next = null;
+        }
+    }
+
+    public class LinkedList
+    {
+        internal Node head;
+        internal Node tail;
+        internal Node current; //This will have latest node
+        public int Count;
+        public LinkedList()
+        {
+            current = head = tail = null;
+            Count = 0;
+        }
+
+        public bool IsEmpty()
+        {
+            return head == null;
+        }
+        public void AddLast(int data)
+        {
+            Node newNode = new Node(data);
+            if (IsEmpty())
+            {
+                head = tail = current = newNode;
+            }
+            else
+            {
+                tail.Next = newNode;
+                tail = newNode;
+                current = newNode;
+            }
+            Count++;
+        }
+        public void PrintList()
+        {
+            if (Count == 0)
+            {
+                Console.WriteLine("Empty list!");
+            }
+            else
+            {
+                Console.Write("Head");
+                Node curr = head;
+                while (curr != null)
+                {
+                    Console.Write(" <-");
+                    Console.Write(curr.Value);
+                    Console.Write("-> ");
+                    curr = curr.Next;
+                }
+                Console.Write("Tail");
+            }
+        }
+        public static LinkedList MergeList(LinkedList a, LinkedList b)
+        {   
+            if (a.Count == 0 && b.Count == 0)
+            {
+                Console.WriteLine("These lists are empty");
+            }
+            else if (a.Count != 0 && b.Count == 0)
+            {
+                return a;
+            }
+            else if (a.Count == 0 && b.Count != 0)
+            {
+                return b;
+            }
+            else
+            {
+                while (a.Count != 0 && b.Count != 0)
+                {
+                    if(a.head != null)
+                    {
+                        a.current = a.head;
+                    }
+                    if (b.head != null)
+                    {
+                        b.current = b.head;
+                    }
+                    
+                    if (a.current.Value >= b.current.Value)
+                    {
+                        b.head = b.current.Next;
+                        a.head = a.current;
+                        b.current.Next = a.current;
+                        a.current = b.current;
+                        
+                        b.Count--;
+                    }
+                    if (a.current.Value < b.current.Value)
+                    {
+                        a.head = a.current.Next;
+                        b.head = b.current;
+                        a.current.Next = b.current;
+                        a.current = b.current;
+
+                        a.Count--;
+                    }
+                }
+            }
+            return a;
+        }
+        public static LinkedList MergeList2(LinkedList a, LinkedList b)
+        {
+            LinkedList c = new LinkedList();
+
+            if (a.Count == 0 && b.Count == 0)
+            {
+                Console.WriteLine("These lists are empty");
+            }
+            else if (a.Count != 0 && b.Count == 0)
+            {
+                return a;
+            }
+            else if (a.Count == 0 && b.Count != 0)
+            {
+                return b;
+            }
+            else
+            {
+                
+                while ((a.Count != 0 && b.Count != 0) && (a.current != null && b.current != null))
+                {
+                    if (a.current.Value >= b.current.Value || a.current == null)
+                    {
+                        c.current.Next = b.current;
+                        b.current = b.current.Next;
+                        c.current = c.current.Next;
+                        b.Count--;
+                    }
+                    if (a.current.Value < b.current.Value || b.current == null)
+                    {
+                        c.current.Next = a.current;
+                        a.current = a.current.Next;
+                        c.current = c.current.Next;
+                        a.Count--;
+                    }
+                }
+            }
+            return c;
+        }
+    }
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            LinkedList list = new LinkedList();
+            LinkedList list2 = new LinkedList();
+
+            list.AddLast(12);
+            Console.WriteLine(list.current.Value);
+
+            Console.WriteLine();
+            list.AddLast(33);
+            list.AddLast(41);
+            Console.WriteLine(list.current.Value);
+
+            list.PrintList();
+            Console.WriteLine();
+
+            list.AddLast(101);
+            Console.WriteLine(list.current.Value);
+            list.PrintList();
+            Console.WriteLine();
+
+            list.PrintList();
+            Console.WriteLine();
+            Console.WriteLine(list.Count);
+            list2.AddLast(13);
+            list2.AddLast(27);
+            list2.AddLast(56);
+            //Console.WriteLine(list2.head.Value);
+            list2.PrintList();
+            Console.WriteLine();
+
+
+            LinkedList.MergeList2(list, list2);
+            list.PrintList();
+
+        }
+    }
+}
