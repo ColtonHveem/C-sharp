@@ -207,28 +207,25 @@ namespace LinkedList
         public void RemoveDuplicateNodes()
         {
             current = head;
-            var tmp = new Node<T>(current.Value);
+            T value = current.Value;
+            //var tmp = new Node<T>(current.Value);
             int quantity = 0;
 
-            while (tmp != tail)
+            for (current = head; current != tail; current = current.Next)
             {
-                while (current != tail)
-                {
-                    if (current.Value.Equals(tmp.Value))
-                    {
-                        quantity++;
-                    }
-                    current = current.Next;
-                }
-                if (tail.Value.Equals(tmp.Value))
+                if (current.Value.Equals(value))
                 {
                     quantity++;
                 }
-                if (quantity != 1)
+                if (tail.Value.Equals(value))
                 {
-                    DeleteNodes(tmp.Value);
+                    quantity++;
                 }
-                tmp = current.Next;
+                if (quantity > 1)
+                {
+                    DeleteNodes(value);
+                }
+                quantity = 0;
             }
         }
     }
