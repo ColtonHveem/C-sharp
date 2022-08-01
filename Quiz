@@ -206,16 +206,18 @@ namespace LinkedList
         }
         public void RemoveDuplicateNodes()
         {
-            current = head;
             T value = current.Value;
             //var tmp = new Node<T>(current.Value);
             int quantity = 0;
 
             for (current = head; current != tail; current = current.Next)
             {
-                if (current.Value.Equals(value))
+                for (current = head; current != tail; current = current.Next)
                 {
-                    quantity++;
+                    if (current.Value.Equals(value))
+                    {
+                        quantity++;
+                    }
                 }
                 if (tail.Value.Equals(value))
                 {
@@ -224,6 +226,10 @@ namespace LinkedList
                 if (quantity > 1)
                 {
                     DeleteNodes(value);
+                }
+                if (current.Next != null)
+                {
+                    value = current.Next.Value;
                 }
                 quantity = 0;
             }
@@ -278,6 +284,7 @@ namespace LinkedList
             Console.WriteLine("tail node is " + testList.tail.Value);
             Console.WriteLine("curr node is " + testList.current.Value);
             Console.WriteLine("Final count of nodes is " + testList.Count);
+            testList.PrintList();
             testList.RemoveDuplicateNodes();
             testList.PrintList();
         }
