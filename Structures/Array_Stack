@@ -1,0 +1,250 @@
+using System; using System.Collections.Generic;
+
+namespace Stack
+{
+    public class Stack<T>
+    {
+        public int Count;
+        public int Capacity;
+        public T[] Mystack;
+        //properties
+
+        //constructor that is empty and default size
+
+        public Stack()
+        {
+            this.Capacity = 10;
+            this.Count = 0;
+            this.Mystack = new T[Capacity];
+        }
+
+        //Peek(), Pop(), Push(Object), IsEmpty(), Contains(Object), Display(), Clear(),
+
+        public Stack(int num)
+        {
+            this.Capacity = num;
+            this.Count = 0;
+            this.Mystack = new T[Capacity];
+        }
+
+        //parametric that allows user to set initial capacity
+
+        public bool IsEmpty()
+        {
+            return Count == 0;
+        }
+
+        public Stack(T[] values)
+        {
+            this.Capacity = values.Length;
+            this.Count = values.Length;
+            foreach (T val in values)
+            {
+                //push each value
+            }
+        }
+
+        private void Resize() //private to ensure that this method is not callable by the user. Only the computer recognizes when resize is necessary
+        {
+            this.Capacity *= 2;
+            Stack<T> temp = new Stack<T>(this.Capacity);
+            for (int i = 0; i < this.Count; i++)
+            {
+                temp.Mystack[i] = this.Mystack[i];
+            }
+            this.Mystack = temp.Mystack;
+        }
+
+
+        public void Push(T value)
+        {            
+            //capacity?
+            //resize
+            //theStack[count] = value
+
+            if (this.Count == this.Capacity)
+            {
+                this.Resize();
+            }
+            else
+            {
+                this.Mystack[Count] = value;
+                this.Count++;
+            }
+        }
+
+        public T Pop()
+        {
+            T temp = default(T);
+            if (this.IsEmpty())
+            {
+                Console.WriteLine("Stack is Empty");
+            }
+            else
+            {
+                temp = this.Mystack[Count - 1];
+                this.Mystack[Count - 1] = default(T);
+                this.Count--;
+            }
+            return temp;
+        }
+        
+        public T Peek()
+        {
+            return this.Mystack[Count - 1];
+        }
+        public void PrintStack()
+        {
+            if (this.IsEmpty())
+            {
+                Console.WriteLine("Stack is Empty");
+            }
+            else
+            {
+                foreach (T val in this.Mystack)
+                {
+                    Console.Write(val + " ");
+                }
+            }
+            Console.WriteLine();
+        }
+
+        public void ClearStack()
+        {
+            if (Count == 0)
+            {
+                Console.WriteLine("Stack is Empty");
+            }
+            else
+            {
+                Stack<T> temp = new Stack<T>();
+                this.Count = temp.Count;
+                this.Capacity = temp.Capacity;
+                this.Mystack = temp.Mystack;
+
+            }
+        }
+
+        public bool Contains(T value)
+        {
+            foreach(T val in this.Mystack)
+            {
+                if (val.Equals(value)) return true;
+            }
+            return false;
+        }
+
+        public bool Balanced(string stackstring)
+        {
+            Stack<char> stacktemp = new Stack<char>();
+
+            foreach (char item in stackstring)
+            {
+                if(item == '(')
+                {
+                    stacktemp.Push(item);
+                }
+                else if (item == ')' && stacktemp.Count != 0)
+                {
+                    stacktemp.Pop();
+                }
+                else if (item == ')' && stacktemp.Count == 0)
+                {
+                    return false;
+                }
+            }
+            if(stacktemp.Count == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public int FindError(string stackstring)
+        {
+            Stack<int> stacktemp = new Stack<int>();
+            int error = -1;
+
+            if (this.Balanced(stackstring) == true)
+            {
+                return error;
+            }
+
+            else
+            {
+                for (int i = 0; i < stackstring.Length; i++)
+                {
+                    if (stackstring[i] == '(')
+                    {
+                        stacktemp.Push(i);
+                    }
+                    else if (stackstring[i] == ')' && stacktemp.Count != 0)
+                    {
+                        stacktemp.Pop();
+                    }
+                    else if (stackstring[i] == ')' && stacktemp.Count == 0)
+                    {
+                        error = i;
+                    }
+                }
+
+                return error;
+            }
+        }
+    }
+    
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Stack<int> stackOne = new Stack<int>();
+            Console.WriteLine("Check if Stack is Empty");
+            Console.WriteLine(stackOne.IsEmpty());
+            Console.WriteLine("Push 10 into stack");
+            stackOne.Push(10);
+            Console.WriteLine("Push 15 into stack");
+            stackOne.Push(15);
+            Console.WriteLine("Push 18 into stack");
+            stackOne.Push(18);
+            Console.WriteLine("Push 25 into stack");
+            stackOne.Push(25);
+            Console.WriteLine("Peek at top value");
+            Console.WriteLine(stackOne.Peek());
+            Console.WriteLine("Print current stack");
+            stackOne.PrintStack();
+            Console.WriteLine("Check Count");
+            Console.WriteLine(stackOne.Count);
+            Console.WriteLine("Check Capacity");
+            Console.WriteLine(stackOne.Capacity);
+            Console.WriteLine("Pop last number");
+            stackOne.Pop();
+            Console.WriteLine("Print current stack");
+            stackOne.PrintStack();
+            Console.WriteLine("See if the stack contains a value 10");
+            Console.WriteLine(stackOne.Contains(10));
+            Console.WriteLine("See if the stack contains a value 21");
+            Console.WriteLine(stackOne.Contains(21));
+            Console.WriteLine("Clear stack");
+            stackOne.ClearStack();
+            Console.WriteLine("Print stack");
+            stackOne.PrintStack();
+            Console.WriteLine();
+            Console.WriteLine();
+
+            Stack<string> stackTwo = new Stack<string>();
+
+            string equation = "(()))(";
+            string equation2 = ")(()";
+            string equation3 = "(())()";
+            Console.WriteLine(stackTwo.Balanced(equation));
+            Console.WriteLine(stackTwo.Balanced(equation2));
+            Console.WriteLine(stackTwo.Balanced(equation3));
+            Console.WriteLine(stackTwo.FindError(equation));
+            Console.WriteLine(stackTwo.FindError(equation2));
+            Console.WriteLine(stackTwo.FindError(equation3));
+        }
+    }
+}
