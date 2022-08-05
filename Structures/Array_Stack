@@ -6,7 +6,7 @@ namespace Stack
     {
         public int Count;
         public int Capacity;
-        public T[] Mystack;
+        public T[] StackArray;
         //properties
 
         //constructor that is empty and default size
@@ -15,7 +15,7 @@ namespace Stack
         {
             this.Capacity = 10;
             this.Count = 0;
-            this.Mystack = new T[Capacity];
+            this.StackArray = new T[Capacity];
         }
 
         //Peek(), Pop(), Push(Object), IsEmpty(), Contains(Object), Display(), Clear(),
@@ -24,7 +24,7 @@ namespace Stack
         {
             this.Capacity = num;
             this.Count = 0;
-            this.Mystack = new T[Capacity];
+            this.StackArray = new T[Capacity];
         }
 
         //parametric that allows user to set initial capacity
@@ -50,9 +50,9 @@ namespace Stack
             Stack<T> temp = new Stack<T>(this.Capacity);
             for (int i = 0; i < this.Count; i++)
             {
-                temp.Mystack[i] = this.Mystack[i];
+                temp.StackArray[i] = this.StackArray[i];
             }
-            this.Mystack = temp.Mystack;
+            this.StackArray = temp.StackArray;
         }
 
 
@@ -68,7 +68,7 @@ namespace Stack
             }
             else
             {
-                this.Mystack[Count] = value;
+                this.StackArray[Count] = value;
                 this.Count++;
             }
         }
@@ -82,8 +82,8 @@ namespace Stack
             }
             else
             {
-                temp = this.Mystack[Count - 1];
-                this.Mystack[Count - 1] = default(T);
+                temp = this.StackArray[Count - 1];
+                this.StackArray[Count - 1] = default(T);
                 this.Count--;
             }
             return temp;
@@ -91,7 +91,7 @@ namespace Stack
         
         public T Peek()
         {
-            return this.Mystack[Count - 1];
+            return this.StackArray[Count - 1];
         }
         public void PrintStack()
         {
@@ -101,7 +101,7 @@ namespace Stack
             }
             else
             {
-                foreach (T val in this.Mystack)
+                foreach (T val in this.StackArray)
                 {
                     Console.Write(val + " ");
                 }
@@ -120,14 +120,14 @@ namespace Stack
                 Stack<T> temp = new Stack<T>();
                 this.Count = temp.Count;
                 this.Capacity = temp.Capacity;
-                this.Mystack = temp.Mystack;
+                this.StackArray = temp.StackArray;
 
             }
         }
 
         public bool Contains(T value)
         {
-            foreach(T val in this.Mystack)
+            foreach(T val in this.StackArray)
             {
                 if (val.Equals(value)) return true;
             }
@@ -248,3 +248,4 @@ namespace Stack
         }
     }
 }
+
