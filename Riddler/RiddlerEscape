@@ -1,0 +1,3653 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+
+namespace Riddler_Escape
+{
+    public class Animal
+    {
+        public int Index, Legs, /*quatity*/ Size, /*lbs*/ Speed; /*mph*/
+        public bool Land, Water, ColorChange, Wings, Fly, Fins, Gills, Lungs, Scales, Hair, Carnivore, Omnivore, Herbivore, Poisonous, FindingNemo;
+        public string Name, Parent;
+
+    }
+    public abstract class Mammal : Animal
+    {
+        public Mammal()
+        {
+            this.Parent = "mammal";
+            this.ColorChange = false;
+            this.Wings = false;
+            this.Fly = false;
+            this.Gills = false;
+            this.Lungs = true;
+            this.Scales = false;
+            this.Hair = true;
+            this.Poisonous = false;
+        }
+    }
+    public class Gorilla : Mammal
+    {
+        public Gorilla()
+        {
+            this.Index = 0;
+            this.Name = "gorilla";
+            this.Size = 683;
+            this.Speed = 25;
+            this.Legs = 2;
+            this.Land = true;
+            this.Water = false;
+            this.Fins = false;
+            this.Carnivore = false;
+            this.Omnivore = true;
+            this.Herbivore = false;
+            this.FindingNemo = false;
+        }
+    }
+    public class Cheetah : Mammal
+    {
+        public Cheetah()
+        {
+            this.Index = 1;
+            this.Name = "cheetah";
+            this.Size = 159;
+            this.Speed = 75;
+            this.Legs = 4;
+            this.Land = true;
+            this.Water = false;
+            this.Fins = false;
+            this.Carnivore = true;
+            this.Omnivore = false;
+            this.Herbivore = false;
+            this.FindingNemo = false;
+        }
+    }
+    public class BlueWhale : Mammal
+    {
+        public BlueWhale()
+        {
+            this.Index = 2;
+            this.Name = "blue whale";
+            this.Size = 330000;
+            this.Speed = 31;
+            this.Legs = 0;
+            this.Land = false;
+            this.Water = true;
+            this.Fins = true;
+            this.Carnivore = true;
+            this.Omnivore = false;
+            this.Herbivore = false;
+            this.FindingNemo = true;
+        }
+    }
+    public class Zebra : Mammal
+    {
+        public Zebra()
+        {
+            this.Index = 3;
+            this.Name = "zebra";
+            this.Size = 992;
+            this.Speed = 43;
+            this.Legs = 4;
+            this.Land = true;
+            this.Water = false;
+            this.Fins = false;
+            this.Carnivore = false;
+            this.Omnivore = false;
+            this.Herbivore = true;
+            this.FindingNemo = false;
+        }
+    }
+    public class Dolphin : Mammal
+    {
+        public Dolphin()
+        {
+            this.Index = 4;
+            this.Name = "dolphin";
+            this.Size = 500;
+            this.Speed = 37;
+            this.Legs = 0;
+            this.Land = false;
+            this.Water = true;
+            this.Fins = true;
+            this.Carnivore = true;
+            this.Omnivore = false;
+            this.Herbivore = false;
+            this.FindingNemo = false;
+        }
+    }
+    public abstract class Reptile : Animal
+    {
+        public Reptile()
+        {
+            this.Parent = "reptile";
+            this.Wings = false;
+            this.Fly = false;
+            this.Fins = false;
+            this.Gills = false;
+            this.Lungs = true;
+            this.Scales = true;
+            this.Hair = false;
+        }
+    }
+    public class Alligator : Reptile
+    {
+        public Alligator()
+        {
+            this.Index = 5;
+            this.Name = "alligator";
+            this.Size = 999;
+            this.Speed = 35;
+            this.Legs = 4;
+            this.Land = true;
+            this.Water = true;
+            this.ColorChange = false;
+            this.Carnivore = true;
+            this.Omnivore = false;
+            this.Herbivore = false;
+            this.Poisonous = false;
+            this.FindingNemo = false;
+        }
+    }
+    public class Anaconda : Reptile
+    {
+        public Anaconda()
+        {
+            this.Index = 6;
+            this.Name = "anaconda";
+            this.Size = 550;
+            this.Speed = 10;
+            this.Legs = 0;
+            this.Land = true;
+            this.Water = true;
+            this.ColorChange = false;
+            this.Carnivore = true;
+            this.Omnivore = false;
+            this.Herbivore = false;
+            this.Poisonous = false;
+            this.FindingNemo = false;
+        }
+    }
+    public class Rattlesnake : Reptile
+    {
+        public Rattlesnake()
+        {
+            this.Index = 7;
+            this.Name = "rattlesnake";
+            this.Size = 10;
+            this.Speed = 18;
+            this.Legs = 0;
+            this.Land = true;
+            this.Water = false;
+            this.ColorChange = false;
+            this.Carnivore = true;
+            this.Omnivore = false;
+            this.Herbivore = false;
+            this.Poisonous = true;
+            this.FindingNemo = false;
+        }
+    }
+    public class SeaTurtle : Reptile
+    {
+        public SeaTurtle()
+        {
+            this.Index = 8;
+            this.Name = "sea turtle";
+            this.Size = 2000;
+            this.Speed = 22;
+            this.Legs = 4;
+            this.Land = true;
+            this.Water = true;
+            this.ColorChange = false;
+            this.Carnivore = false;
+            this.Omnivore = false;
+            this.Herbivore = true;
+            this.Poisonous = false;
+            this.FindingNemo = true;
+        }
+    }
+    public class Chameleon : Reptile
+    {
+        public Chameleon()
+        {
+            this.Index = 9;
+            this.Name = "chameleon";
+            this.Size = 4;
+            this.Speed = 21;
+            this.Legs = 4;
+            this.Land = true;
+            this.Water = false;
+            this.ColorChange = true;
+            this.Carnivore = false;
+            this.Omnivore = true;
+            this.Herbivore = false;
+            this.Poisonous = false;
+            this.FindingNemo = false;
+        }
+    }
+    public abstract class Amphibian : Animal
+    {
+        public Amphibian()
+        {
+            this.Parent = "amphibian";
+            this.Legs = 4;
+            this.Land = true;
+            this.Water = true;
+            this.ColorChange = false;
+            this.Wings = false;
+            this.Fly = false;
+            this.Fins = true;
+            this.Gills = true;
+            this.Lungs = true;
+            this.Scales = false;
+            this.Hair = false;
+            this.Carnivore = true;
+            this.Omnivore = false;
+            this.Herbivore = true;
+            this.Poisonous = false;
+            this.FindingNemo = false;
+        }
+    }
+    public class Frog : Amphibian
+    {
+        public Frog()
+        {
+            this.Index = 10;
+            this.Name = "frog";
+            this.Size = 7;
+            this.Speed = 10;
+        }
+    }
+    public abstract class Bird : Animal
+    {
+        public Bird()
+        {
+            this.Parent = "bird";
+            this.Legs = 2;
+            this.Land = true;
+            this.ColorChange = false;
+            this.Wings = true;
+            this.Fins = false;
+            this.Gills = false;
+            this.Lungs = true;
+            this.Scales = false;
+            this.Hair = false;
+            this.Poisonous = false;
+        }
+    }
+    public class Pelican : Bird
+    {
+        public Pelican()
+        {
+            this.Index = 11;
+            this.Name = "pelican";
+            this.Size = 26;
+            this.Speed = 30;
+            this.Water = false;
+            this.Fly = true;
+            this.Carnivore = true;
+            this.Omnivore = false;
+            this.Herbivore = false;
+            this.FindingNemo = true;
+        }
+    }
+    public class Falcon : Bird
+    {
+        public Falcon()
+        {
+            this.Index = 12;
+            this.Name = "falcon";
+            this.Size = 3;
+            this.Speed = 240;
+            this.Water = false;
+            this.Fly = true;
+            this.Carnivore = true;
+            this.Omnivore = false;
+            this.Herbivore = false;
+            this.FindingNemo = false;
+        }
+    }
+    public class Hummingbird : Bird
+    {
+        public Hummingbird()
+        {
+            this.Index = 13;
+            this.Name = "hummingbird";
+            this.Size = 0;
+            this.Speed = 61;
+            this.Water = false;
+            this.Fly = true;
+            this.Carnivore = false;
+            this.Omnivore = true;
+            this.Herbivore = false;
+            this.FindingNemo = false;
+        }
+    }
+    public class Penguin : Bird
+    {
+        public Penguin()
+        {
+            this.Index = 14;
+            this.Name = "penguin";
+            this.Size = 88;
+            this.Speed = 25;
+            this.Water = true;
+            this.Fly = false;
+            this.Carnivore = true;
+            this.Omnivore = false;
+            this.Herbivore = false;
+            this.FindingNemo = false;
+        }
+    }
+    public class Ostrich : Bird
+    {
+        public Ostrich()
+        {
+            this.Index = 15;
+            this.Name = "ostrich";
+            this.Size = 350;
+            this.Speed = 43;
+            this.Water = false;
+            this.Fly = false;
+            this.Carnivore = false;
+            this.Omnivore = false;
+            this.Herbivore = true;
+            this.FindingNemo = false;
+        }
+    }
+    public abstract class Fish : Animal
+    {
+        public Fish()
+        {
+            this.Parent = "fish";
+            this.Legs = 0;
+            this.Land = false;
+            this.Water = true;
+            this.ColorChange = false;
+            this.Wings = false;
+            this.Fly = false;
+            this.Fins = true;
+            this.Gills = true;
+            this.Lungs = false;
+            this.Hair = false;
+            this.Herbivore = false;
+            this.FindingNemo = true;
+        }
+    }
+    public class GreatWhiteShark : Fish
+    {
+        public GreatWhiteShark()
+        {
+            this.Index = 16;
+            this.Name = "great white shark";
+            this.Size = 5000;
+            this.Speed = 35;
+            this.Scales = true;
+            this.Carnivore = true;
+            this.Omnivore = false;
+            this.Poisonous = false;
+        }
+    }
+    public class Clownfish : Fish
+    {
+        public Clownfish()
+        {
+            this.Index = 17;
+            this.Name = "clownfish";
+            this.Size = 8;
+            this.Speed = 18;
+            this.Scales = true;
+            this.Carnivore = false;
+            this.Omnivore = true;
+            this.Poisonous = false;
+        }
+    }
+    public class Stingray : Fish
+    {
+        public Stingray()
+        {
+            this.Index = 18;
+            this.Name = "stingray";
+            this.Size = 700;
+            this.Speed = 30;
+            this.Scales = true;
+            this.Carnivore = true;
+            this.Omnivore = false;
+            this.Poisonous = true;
+        }
+    }
+    public class Seahorse : Fish
+    {
+        public Seahorse()
+        {
+            this.Index = 19;
+            this.Name = "seahorse";
+            this.Size = 1;
+            this.Speed = 2;
+            this.Scales = false;
+            this.Carnivore = true;
+            this.Omnivore = false;
+            this.Poisonous = false;
+        }
+    }
+    public abstract class Invertebrate : Animal
+    {
+        public Invertebrate()
+        {
+            this.Parent = "invertebrate";
+            this.Wings = false;
+            this.Fly = false;
+            this.Scales = false;
+            this.Carnivore = true;
+        }
+    }
+    public class Octopus : Invertebrate
+    {
+        public Octopus()
+        {
+            this.Index = 20;
+            this.Name = "octopus";
+            this.Size = 600;
+            this.Speed = 25;
+            this.Legs = 8;
+            this.Land = false;
+            this.Water = true;
+            this.ColorChange = true;
+            this.Fins = false;
+            this.Gills = true;
+            this.Lungs = false;
+            this.Hair = false;
+            this.Omnivore = false;
+            this.Herbivore = false;
+            this.Poisonous = false;
+            this.FindingNemo = true;
+        }
+    }
+    public class Cuttlefish : Invertebrate
+    {
+        public Cuttlefish()
+        {
+            this.Index = 21;
+            this.Name = "cuttlefish";
+            this.Size = 23;
+            this.Speed = 6;
+            this.Legs = 8;
+            this.Land = false;
+            this.Water = true;
+            this.ColorChange = true;
+            this.Fins = true;
+            this.Gills = true;
+            this.Lungs = false;
+            this.Hair = false;
+            this.Omnivore = false;
+            this.Herbivore = false;
+            this.Poisonous = false;
+            this.FindingNemo = false;
+        }
+    }
+    public class BlackWidowSpider : Invertebrate
+    {
+        public BlackWidowSpider()
+        {
+            this.Index = 22;
+            this.Name = "black widow spider";
+            this.Size = 0;
+            this.Speed = 1;
+            this.Legs = 8;
+            this.Land = true;
+            this.Water = false;
+            this.ColorChange = false;
+            this.Fins = false;
+            this.Gills = false;
+            this.Lungs = true;
+            this.Hair = true;
+            this.Omnivore = false;
+            this.Herbivore = false;
+            this.Poisonous = true;
+            this.FindingNemo = false;
+        }
+    }
+    public class Starfish : Invertebrate
+    {
+        public Starfish()
+        {
+            this.Index = 23;
+            this.Name = "starfish";
+            this.Size = 11;
+            this.Speed = 1;
+            this.Legs = 5;
+            this.Land = false;
+            this.Water = true;
+            this.ColorChange = false;
+            this.Fins = false;
+            this.Gills = false;
+            this.Lungs = false;
+            this.Hair = true;
+            this.Omnivore = false;
+            this.Herbivore = false;
+            this.Poisonous = false;
+            this.FindingNemo = true;
+        }
+    }
+    public class Snail : Invertebrate
+    {
+        public Snail()
+        {
+            this.Index = 24;
+            this.Name = "snail";
+            this.Size = 1;
+            this.Speed = 0;
+            this.Legs = 0;
+            this.Land = true;
+            this.Water = false;
+            this.ColorChange = false;
+            this.Fins = false;
+            this.Gills = false;
+            this.Lungs = true;
+            this.Hair = false;
+            this.Omnivore = true;
+            this.Herbivore = true;
+            this.Poisonous = false;
+            this.FindingNemo = false;
+        }
+    }
+    public class Program
+    {
+        enum AnimalType
+        {
+            gorilla, cheetah, bluewhale, zebra, dolphin, alligator, anaconda, seaturtle, chameleon, rattlesnake, frog, pelican, hummingbird, falcon, penguin, ostrich, greatwhiteshark, clownfish, stingray, seahorse, octopus, cuttlefish, blackwidowspider, starfish, snail
+            //if (Zoo[(int) AnimalType.gorilla].Speed > Zoo[(int) AnimalType.cheetah].Speed)
+        }
+        public static void Main(string[] args)
+        {
+            Title();
+            NameandIntro();
+            HotelRiddle();
+            LogicRiddle();
+            DarwinRiddleIntro();
+            DarwinRiddleNotes();
+            DarwinRiddle();
+            Outro();
+
+        }
+        public static void Title()
+        {
+            int milliseconds2 = 4000;
+
+            Console.WriteLine(@"
+                ██████╗         ████████╗██╗  ██╗███████╗        ██████╗        
+                ╚════██╗        ╚══██╔══╝██║  ██║██╔════╝        ╚════██╗       
+                  ▄███╔╝           ██║   ███████║█████╗            ▄███╔╝       
+                  ▀▀══╝            ██║   ██╔══██║██╔══╝            ▀▀══╝        
+                  ██╗              ██║   ██║  ██║███████╗          ██╗          
+                  ╚═╝              ╚═╝   ╚═╝  ╚═╝╚══════╝          ╚═╝          
+                                                                                
+                ██████╗ ██╗██████╗ ██████╗ ██╗     ███████╗██████╗██ ███████╗     
+                ██╔══██╗██║██╔══██╗██╔══██╗██║     ██╔════╝██╔══██╗  ██╔════╝     
+                ██████╔╝██║██║  ██║██║  ██║██║     █████╗  ██████╔╝  ███████╗     
+                ██╔══██╗██║██║  ██║██║  ██║██║     ██╔══╝  ██╔══██╗  ╚════██║     
+                ██║  ██║██║██████╔╝██████╔╝███████╗███████╗██║  ██║  ███████║     
+                ╚═╝  ╚═╝╚═╝╚═════╝ ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝  ╚══════╝     
+                                                                                
+          ██████╗     ███████╗███████╗ ██████╗ █████╗ ██████╗ ███████╗    ██████╗ 
+          ╚════██╗    ██╔════╝██╔════╝██╔════╝██╔══██╗██╔══██╗██╔════╝    ╚════██╗
+            ▄███╔╝    █████╗  ███████╗██║     ███████║██████╔╝█████╗        ▄███╔╝
+            ▀▀══╝     ██╔══╝  ╚════██║██║     ██╔══██║██╔═══╝ ██╔══╝        ▀▀══╝ 
+            ██╗       ███████╗███████║╚██████╗██║  ██║██║     ███████╗      ██╗   
+            ╚═╝       ╚══════╝╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝     ╚══════╝      ╚═╝   ");
+            Thread.Sleep(milliseconds2);
+            Console.Clear();
+        }
+        public static void NameandIntro()
+        {
+            int milliseconds = 2000;
+            int milliseconds2 = 4000;
+
+            Console.WriteLine("Hello User. Or are you an NPC like me?");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine();
+            Console.WriteLine("Either way, you have a name. What is your name?");
+            Console.WriteLine();
+            Console.Write("Enter your name: ");
+            string name = Console.ReadLine();
+            Console.WriteLine();
+            Console.WriteLine($"Welcome to my world {name}. I am the riddler. Can you solve all my puzzles?");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine();
+            Console.WriteLine($"I won't take it easy on you {name}. Let's see if you can overcome the tests of the riddler.");
+            Thread.Sleep(milliseconds2);
+            Console.Clear();
+            Console.WriteLine("You are in my world now...");
+            Thread.Sleep(milliseconds2);
+            Console.Clear();
+            Console.WriteLine("If you wish to leave my world...you must prove your worth and solve three tests of the mind.");
+            Thread.Sleep(milliseconds2);
+            Console.Clear();
+            Console.WriteLine("Are you up to the task?");
+            Thread.Sleep(milliseconds);
+            Console.Clear();
+            Console.WriteLine("This is your last chance. After this, there is no turning back.");
+            Thread.Sleep(milliseconds2);
+            Console.Clear();
+            Console.WriteLine("I promise you brain twisters, nothing more.");
+            Thread.Sleep(milliseconds);
+            Console.Clear();
+            Console.WriteLine("If you wish to test your skills against the riddler, enter: It's only a simulation");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("If brain twisters are too much for you, enter: Don't twist my brain!");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("What do you choose?");
+            Console.Write("Enter Choice: ");
+
+            string answer = Console.ReadLine();
+            answer = answer.ToLower();
+            int x = 0;
+
+            while (answer != "it's only a simulation" && answer != "don't twist my brain!")
+            {
+                Console.WriteLine("I gave you two choices. You must pick one of the two.");
+                x++;
+                if (x % 3 == 0)
+                {
+                    Console.WriteLine("...I'm starting to think you are an NPC.");
+                }
+                if (x % 5 == 0)
+                {
+                    Console.WriteLine($"{name}...you are a User right?");
+                }
+                answer = Console.ReadLine();
+                answer = answer.ToLower();
+            }
+            if (answer == "it's only a simulation")
+            {
+                Console.WriteLine();
+                Console.WriteLine("Hooray! I was hoping you would play my game.");
+                Thread.Sleep(milliseconds2);
+                Console.Clear();
+            }
+            if (answer == "don't twist my brain!")
+            {
+                Console.WriteLine("Aww man...");
+                Thread.Sleep(milliseconds);
+                Console.WriteLine("I thought everyone enjoyed a good brain twist.");
+                Thread.Sleep(milliseconds);
+                Console.WriteLine("I guess the simulation is too much for you.");
+                Thread.Sleep(milliseconds);
+                Environment.Exit(0);
+            }
+        }
+        public static void HotelRiddle()
+        {
+            int milliseconds = 2000;
+            int milliseconds2 = 4000;
+
+            Random x = new Random();
+            int phantom = x.Next(1, 101); //first number included, second number not
+            while (phantom > 47 && phantom < 53)
+            {
+                phantom = x.Next(1, 101);
+            }
+
+            Console.WriteLine("Your first test is one of arithmetic sense. Good Luck.");
+            Thread.Sleep(milliseconds2);
+            Console.Clear();
+            Console.WriteLine("A phantom torments the guests of the 100 story high Hotel O'Plenty.");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("You possess the only device that can send the phantom back into the void.");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("I can give the elevator enough power so that you can visit as many as 5 floors.");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("The phantom expulsion device will tell you if the phantom is above you or below you on each stop.");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("You must be within 2 floors of the phantom for the expulsion device to work.");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("Expel the phantom. Save the poor souls within 100 story high Hotel O'Plenty.");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("If you don't know where to start, the GHOST BUSTERS are experts on phantoms.");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("Choose your first floor wisely.");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("What floor shall I send you to first?");
+            Console.WriteLine();
+            Console.Write("Enter a floor: ");
+
+            string input = Console.ReadLine();
+            int floor;
+            bool number = Int32.TryParse(input, out floor);
+            int count = 0;
+            int hint = 0;
+            int hintintro = 0;
+
+            while (count <= 5)
+            {
+                if (number == false)
+                {
+                    string clue;
+                    clue = input.ToString();
+                    clue = clue.ToLower();
+
+                    if (clue != "ghost busters")
+                    {
+                        Console.WriteLine("That is not a floor in the Hotel. The guests can only survive on their mini bars for so long. Pick a floor, phantom hunter.");
+                        Console.WriteLine();
+                        Console.Write("Enter Floor: ");
+                        input = Console.ReadLine();
+                        number = Int32.TryParse(input, out floor);
+                        Console.WriteLine();
+                    }
+
+                    if (clue == "ghost busters")
+                    {
+                        if (hint == 1)
+                        {
+                            Console.WriteLine("The ghost busters are busy fighting ghosts.");
+                            Console.WriteLine();
+                        }
+                        while (hint < 1)
+                        {
+                            if (hintintro < 1)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("This is the Ghost Busters hotline.");
+                                Thread.Sleep(milliseconds2);
+                                Console.WriteLine("I see you got assigned the phantom at Hotel O'Plenty.");
+                                Thread.Sleep(milliseconds2);
+                                Console.WriteLine("Sorry we couldn't expel it for you. We are stretched thin with ghost calls at the moment.");
+                                Thread.Sleep(milliseconds2);
+                                Console.WriteLine("But I can spare time for one inquiry about our research on the phantom at Hotel O'Plenty.");
+                                Thread.Sleep(milliseconds2);
+                                Console.WriteLine("I have information on a few of your phantom's behaviors.");
+                                Thread.Sleep(milliseconds2);
+                                Console.WriteLine();
+                                Console.WriteLine("You can ask one of the following questions:");
+                                Thread.Sleep(milliseconds2);
+                                Console.WriteLine("Does the phantom visit floors that are divisible by 4 -- or -- 4?");
+                                Console.WriteLine("Does the phantom visit floors that are divisible by 5 -- or -- 5?");
+                                Console.WriteLine("Does the phantom visit floors that are prime numbers -- or -- prime?");
+                                Console.WriteLine("Does the phantom visit floors that are odd numbers -- or -- odd?");
+                                Thread.Sleep(milliseconds2);
+                                Console.WriteLine();
+                                Console.WriteLine("What would you like to know?");
+                                Console.WriteLine();
+                                hintintro++;
+                            }
+
+                            Console.Write("Enter Question: ");
+
+                            string behavior = Console.ReadLine();
+                            behavior = behavior.ToLower();
+
+                            if (behavior == "Does the phantom visit floors that are divisible by 4?" || behavior == "4?")
+                            {
+                                if (phantom % 4 == 0)
+                                {
+                                    Console.WriteLine("Yes");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No");
+                                }
+                            }
+                            else if (behavior == "Does the phantom visit floors that are divisible by 5?" || behavior == "5?")
+                            {
+                                if (phantom % 5 == 0)
+                                {
+                                    Console.WriteLine("Yes");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No");
+                                }
+                            }
+                            else if (behavior == "Does the phantom visit floors that are prime numbers?" || behavior == "prime?")
+                            {
+                                if (phantom == 2 || phantom == 3 || phantom == 5 || phantom == 7 || phantom == 11 || phantom == 13 || phantom == 17 || phantom == 19 || phantom == 23 || phantom == 29 || phantom == 31 || phantom == 37 || phantom == 41 || phantom == 43 || phantom == 47 || phantom == 53 || phantom == 59 || phantom == 61 || phantom == 67 || phantom == 71 || phantom == 73 || phantom == 79 || phantom == 83 || phantom == 89 || phantom == 97)
+                                {
+                                    Console.WriteLine("Yes");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No");
+                                }
+                            }
+                            else if (behavior == "Does the phantom visit floors that are odd numbers?" || behavior == "odd?")
+                            {
+                                if (phantom % 2 == 1)
+                                {
+                                    Console.WriteLine("Yes");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Sorry, I only have research on a few topics. I am very busy. Please ask about one of the topics I have researched.");
+                                Console.WriteLine();
+                                hint--;
+                            }
+                            hint++;
+                            if (hint == 1)
+                            {
+                                Thread.Sleep(milliseconds);
+                                Console.WriteLine();
+                                Console.WriteLine("Thanks for calling Ghost Busters! Good luck with your phantom!");
+                                Console.WriteLine();
+                            }
+                        }
+                        Console.Write("Enter a floor: ");
+                        input = Console.ReadLine();
+                        number = Int32.TryParse(input, out floor);
+                        Console.WriteLine();
+                    }
+                }
+                if (number == true)
+                {
+                    if (Math.Abs(phantom - floor) <= 2)
+                    {
+                        Console.WriteLine($"You are in range! The phantom is on floor {phantom}! Use the device!");
+                        Thread.Sleep(milliseconds2);
+                        Console.WriteLine("Hurry! Press 'enter' to expel the phantom!");
+                        Thread.Sleep(milliseconds);
+                        Console.ReadLine();
+                        Console.Clear();
+                        Console.WriteLine("You saved the virtual guests of my make-believe hotel.");
+                        Thread.Sleep(milliseconds2);
+                        Console.WriteLine();
+                        Console.WriteLine("You passed the first test. But the riddler isn't done with you yet.");
+                        Thread.Sleep(milliseconds2);
+                        Console.Clear();
+                        return;
+                    }
+                    else if (floor > phantom)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("The phantom is beneath you");
+                    }
+                    else if (floor < phantom)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("The phantom is above you");
+                    }
+                    count++;
+                    if (count != 5)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine($"You can vist {5 - count} more floor(s)...");
+                        Console.WriteLine();
+                        Console.WriteLine("What floor will you visit next?");
+                        Console.Write("Enter a floor: ");
+                        input = Console.ReadLine();
+                        number = Int32.TryParse(input, out floor);
+                        Console.WriteLine();
+                    }
+                }
+                if (count == 5)
+                {
+                    Console.WriteLine("Oh no...");
+                    Thread.Sleep(milliseconds);
+                    Console.WriteLine("Looks like Hotel O'Plenty will be haunted forever.");
+                    Thread.Sleep(milliseconds2);
+                    Console.Clear();
+                    Console.WriteLine("Wait! I found enough power for the elevator to visit five more floors!");
+                    Thread.Sleep(milliseconds2);
+                    Console.WriteLine("Looks like the phantom has moved...");
+                    Thread.Sleep(milliseconds2);
+                    Console.WriteLine("No time to waste! Go get the phantom!");
+                    Thread.Sleep(milliseconds2);
+                    Console.WriteLine("What floor shall I send you to first?");
+                    Console.WriteLine();
+                    Thread.Sleep(milliseconds);
+                    Console.Write("Enter a floor: ");
+
+                    input = Console.ReadLine();
+                    number = Int32.TryParse(input, out floor);
+                    count = 0;
+
+                    phantom = x.Next(1, 101);
+
+                    while (phantom > 47 && phantom < 53)
+                    {
+                        phantom = x.Next(1, 101);
+                    }
+                }
+            }
+        }
+        public static void LogicRiddle()
+        {
+            int milliseconds = 2000;
+            int milliseconds2 = 4000;
+
+            Console.WriteLine("Oh no! We just got sucked through a portal into a space time continuum!");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("Looks like we are in a different World now.");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("Nothing seems to make sense here.");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("Looks like you need to make sense of the nonsense if you wish to proceed.");
+            Thread.Sleep(milliseconds2);
+            Console.Clear();
+
+            Console.WriteLine("I believe in you! Escape the Upside Down World.");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("I see there are five different objects in this World.");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("One Giant, one Man, one Cat, one Mouse, and one Block of Cheese.");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("Looks like you have to establish some kind of order.");
+            Thread.Sleep(milliseconds2);
+            Console.Clear();
+
+            Console.WriteLine("Size is different here.");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("In your world, you would probably order the size of the objects something like this:");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("Giant > Man > Cat > Mouse > Cheese");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("But it looks like that portal really messed things up.");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("Use the laws of this world and a few odd observations to solve the riddle.");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("You must place the 5 objects in order from largest to smallest.");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds2);
+
+            Console.WriteLine("\t\t\t THE FOUR UNBREAKABLE LAWS");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine();
+            Console.WriteLine("Law 1:\tAn object needs teeth to eat.");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Law 2:\tObjects eat other objects that are one size smaller.");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Law 3:\tObjects can be friends and friends do not eat each other.");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Law 4:\tThe largest object protects the smallest object.");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine();
+
+            Console.WriteLine("\t\t\t\tOBSERVATIONS");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("Observation 1:\tCheese has teeth.");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Observation 2:\tMan doesn't need protection.");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Observation 3:\tCat and Mouse are friends.");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Observation 4:\tMouse eats Man.");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Observation 5:\tGiant and Cheese are friends.");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Observation 6:\tMouse protects an object, but not the Cat.");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine();
+            Console.WriteLine("Write the correct order, from largest to smallest:");
+            Console.WriteLine();
+
+            LogicRiddleOrder();
+
+            Console.WriteLine("One riddle left. Can you solve them all?");
+        }
+        public static void LogicRiddleOrder()
+        {
+            int milliseconds = 2000;
+            int milliseconds2 = 4000;
+
+            Console.Write("Largest:\t ");
+            string a = Console.ReadLine();
+            a = a.ToLower();
+            Console.Write("2nd Largest:\t ");
+            string b = Console.ReadLine();
+            b = b.ToLower();
+            Console.Write("3rd Largest:\t ");
+            string c = Console.ReadLine();
+            c = c.ToLower();
+            Console.Write("4th Largest:\t ");
+            string d = Console.ReadLine();
+            d = d.ToLower();
+            Console.Write("Smallest:\t ");
+            string e = Console.ReadLine();
+            e = e.ToLower();
+
+            string[] correctsize = new string[] { "mouse", "man", "cheese", "cat", "giant" };
+            string[] usersize = new string[] { a, b, c, d, e };
+
+            int count = 0;
+            while (count != 5)
+            {
+                count = 0;
+                for (int i = 0; i < usersize.Length; i++)
+                {
+                    if (usersize[i] == correctsize[i])
+                    {
+                        count++;
+                    }
+                }
+                if (count != 5)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"You got {count} in the correct order. Try again.");
+                    Console.WriteLine();
+                    Console.Write("Largest:\t ");
+                    a = Console.ReadLine();
+                    a = a.ToLower();
+                    Console.Write("2nd Largest:\t ");
+                    b = Console.ReadLine();
+                    b = b.ToLower();
+                    Console.Write("3rd Largest:\t ");
+                    c = Console.ReadLine();
+                    c = c.ToLower();
+                    Console.Write("4th Largest:\t ");
+                    d = Console.ReadLine();
+                    d = d.ToLower();
+                    Console.Write("Smallest:\t ");
+                    e = Console.ReadLine();
+                    e = e.ToLower();
+                    usersize = new string[] { a, b, c, d, e };
+                }
+                if (count == 5)
+                {
+
+                    Console.WriteLine();
+                    Console.WriteLine("You know this strange world inside and out.");
+                    Thread.Sleep(milliseconds);
+                    Console.WriteLine("The Riddler is impressed.");
+                    Thread.Sleep(milliseconds2);
+                    Console.Clear();
+                }
+            }
+        }
+        public static Animal GetAnimal()
+        {
+            List<string> Animals = new List<string> { "Gorilla", "Cheetah", "BlueWhale", "Zebra", "Dolphin", "Alligator", "Anaconda", "SeaTurtle", "Chameleon", "Rattlesnake", "Frog", "Pelican", "Falcon", "Hummingbird", "Penguin", "Ostrich", "GreatWhiteShark", "Clownfish", "Stingray", "Seahorse", "Octopus", "Cuttlefish", "BlackWidowSpider", "Starfish", "Snail" };
+
+            Random x = new Random();
+            int index = x.Next(1, 25);
+            string choice = Animals[index];
+
+            Animal favorite = new Animal();
+
+            if (choice == "Gorilla")
+            {
+                favorite = new Gorilla();
+                Console.WriteLine(favorite.Lungs);
+                return favorite;
+            }
+            if (choice == "Cheetah")
+            {
+                favorite = new Cheetah();
+                return favorite;
+            }
+            if (choice == "BlueWhale")
+            {
+                favorite = new BlueWhale();
+                return favorite;
+            }
+            if (choice == "Zebra")
+            {
+                favorite = new Zebra();
+                return favorite;
+            }
+            if (choice == "Dolphin")
+            {
+                favorite = new Dolphin();
+                return favorite;
+            }
+            if (choice == "Alligator")
+            {
+                favorite = new Alligator();
+                return favorite;
+            }
+            if (choice == "Anaconda")
+            {
+                favorite = new Anaconda();
+                return favorite;
+            }
+            if (choice == "SeaTurtle")
+            {
+                favorite = new SeaTurtle();
+                return favorite;
+            }
+            if (choice == "Chameleon")
+            {
+                favorite = new Chameleon();
+                return favorite;
+            }
+            if (choice == "Rattlesnake")
+            {
+                favorite = new Rattlesnake();
+                return favorite;
+            }
+            if (choice == "Frog")
+            {
+                favorite = new Frog();
+                return favorite;
+            }
+            if (choice == "Pelican")
+            {
+                favorite = new Pelican();
+                return favorite;
+            }
+            if (choice == "Falcon")
+            {
+                favorite = new Falcon();
+                return favorite;
+            }
+            if (choice == "Hummingbird")
+            {
+                favorite = new Hummingbird();
+                return favorite;
+            }
+            if (choice == "Penguin")
+            {
+                favorite = new Penguin();
+                return favorite;
+            }
+            if (choice == "Ostrich")
+            {
+                favorite = new Ostrich();
+                return favorite;
+            }
+            if (choice == "GreatWhiteShark")
+            {
+                favorite = new GreatWhiteShark();
+                return favorite;
+            }
+            if (choice == "Clownfish")
+            {
+                favorite = new Clownfish();
+                return favorite;
+            }
+            if (choice == "Stingray")
+            {
+                favorite = new Stingray();
+                return favorite;
+            }
+            if (choice == "Seahorse")
+            {
+                favorite = new Seahorse();
+                return favorite;
+            }
+            if (choice == "Octopus")
+            {
+                favorite = new Octopus();
+                return favorite;
+            }
+            if (choice == "Cuttlefish")
+            {
+                favorite = new Cuttlefish();
+                return favorite;
+            }
+            if (choice == "BlackWidowSpider")
+            {
+                favorite = new BlackWidowSpider();
+                return favorite;
+            }
+            if (choice == "Starfish")
+            {
+                favorite = new Starfish();
+                return favorite;
+            }
+            if (choice == "Snail")
+            {
+                favorite = new Snail();
+                return favorite;
+            }
+            else
+            {
+                return favorite;
+            }
+        }
+        public static IDictionary<string, Animal> CreateZoo()
+        {
+            Animal gorilla = new Gorilla();
+
+            Animal cheetah = new Cheetah();
+
+            Animal bluewhale = new BlueWhale();
+
+            Animal zebra = new Zebra();
+
+            Animal dolphin = new Dolphin();
+
+            Animal alligator = new Alligator();
+
+            Animal anaconda = new Anaconda();
+
+            Animal seaturtle = new SeaTurtle();
+
+            Animal chameleon = new Chameleon();
+
+            Animal rattlesnake = new Rattlesnake();
+
+            Animal frog = new Frog();
+
+            Animal pelican = new Pelican();
+
+            Animal hummingbird = new Hummingbird();
+
+            Animal falcon = new Falcon();
+
+            Animal penguin = new Penguin();
+
+            Animal ostrich = new Ostrich();
+
+            Animal greatwhiteshark = new GreatWhiteShark();
+
+            Animal clownfish = new Clownfish();
+
+            Animal stingray = new Stingray();
+
+            Animal seahorse = new Seahorse();
+
+            Animal octopus = new Octopus();
+
+            Animal cuttlefish = new Cuttlefish();
+
+            Animal blackwidowspider = new BlackWidowSpider();
+
+            Animal starfish = new Starfish();
+
+            Animal snail = new Snail();
+
+            //Animal[] Zoo = { gorilla, cheetah } ;
+            //return Zoo;
+
+            IDictionary<string, Animal> Zoo = new Dictionary<string, Animal>() { { "Gorilla", gorilla }, { "Cheetah", cheetah }, { "BlueWhale", bluewhale }, { "Zebra", zebra }, { "Dolphin", dolphin }, { "Alligator", alligator }, { "Anaconda", anaconda }, { "SeaTurtle", seaturtle }, { "Chameleon", chameleon }, { "Rattlesnake", rattlesnake }, { "Frog", frog }, { "Pelican", pelican }, { "Hummingbird", hummingbird }, { "Falcon", falcon }, { "Penguin", penguin }, { "Ostrich", ostrich }, { "GreatWhiteShark", greatwhiteshark }, { "Clownfish", clownfish }, { "Stingray", stingray }, { "Seahorse", seahorse }, { "Octopus", octopus }, { "Cuttlefish", cuttlefish }, { "BlackWidowSpider", blackwidowspider }, { "Starfish", starfish }, { "Snail", snail } };
+            return Zoo;
+            //Zoo.Add("Gorilla", gorilla);
+        }
+        public static void DarwinRiddleIntro()
+        {
+            int milliseconds = 2000;
+            int milliseconds2 = 4000;
+
+            Console.WriteLine("You are in luck!");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Charles Darwin is going on an animal discovery expedition, and he has room for one assistant.");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("Believe it or not, he picked you!");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("Make sure to document everything! I will want to see a list of your observations when you return...");
+            Thread.Sleep(milliseconds);
+            Thread.Sleep(milliseconds2);
+            Console.Clear();
+            Console.WriteLine("Wow");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("You found a bunch of cool animals!");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("After looking at your notes, I already have a favorite.");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("What do you think? Can you guess my favorite?");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine();
+            Console.WriteLine("Here, I'll give you your notes back so you at least have a reference.");
+            Thread.Sleep(milliseconds2);
+            Console.Clear();
+        }
+        public static void DarwinRiddleNotes()
+        {
+            int milliseconds = 2000;
+            int milliseconds2 = 4000;
+
+            Console.WriteLine("\t\t\tGUESS WHO RIDDLE");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("ANIMALS FOUND");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Mammals:\t Gorilla, Cheetah, Blue Whale, Zebra, Dolphin");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Reptiles:\t Alligator, Anaconda, Sea Turtle, Chameleon, Rattlesnake");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Amphibians:\t Frog");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Birds:\t\t Pelican, Hummingbird, Falcon, Penguin, Ostrich");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Fish:\t\t Great White Shark, Clownfish, Stingray, Seahorse");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Invertebrates:\t Octopus, Cuttlefish, Black Widow Spider, Starfish, Snail");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("ANIMAL QUALITIES");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Land based, Water based");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Legs, Wings, Fins, Gills, Lungs, Scales, Hair");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Capable of flight, Capable of color change, Poisonous");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Carnivore, Omnivore, Herbivore");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Finding Nemo character");
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine();
+            Console.WriteLine("QUESTIONS YOU CAN ASK");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Is it a(n) mammal(reptile, amphibian, bird, fish, invertebrate)? -- or -- mammal(reptile, amphibian, bird, fish, invertebrate)?");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Is it larger than(smaller than) a Gorilla(Cheetah, Blue Whale, etc.) -- or -- larger than(smaller than) Gorilla(Cheetah, Blue Whale, etc.)");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Is it faster than(slower than) a Gorilla(Cheetah, Blue Whale, etc.) -- or -- faster than(slower than) Gorilla(Cheetah, Blue Whale, etc.)");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Does it have 0(2,4,5,8) legs? -- or -- 0(2,4,5,8) legs?");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Does it live in water? -- or -- water?");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Does it live on land? -- or -- land?");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Does it have wings(fins, gills, lungs, scales, hair)? -- or -- wings(fins, gills, lungs, scales, hair)?");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Can it fly(change color)? -- or -- fly(change color)?");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Is it poisonous? -- or -- poisonous?");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Is it a(n) carnivore(omnivore, herbivore)? -- or -- carnivore(omnivore, herbivore)?");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Is it a character in Finding Nemo? -- or -- nemo?");
+            Console.WriteLine();
+            Thread.Sleep(milliseconds2);
+            Console.WriteLine("Can you guess my favorite?");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("I'll give you 5 questions.");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Good Luck!");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine();
+        }
+        public static void DarwinRiddleNotesRepeat()
+        {
+            Console.WriteLine("\t\t\tGUESS WHO RIDDLE");
+            Console.WriteLine();
+
+            Console.WriteLine("ANIMALS FOUND");
+            Console.WriteLine();
+            Console.WriteLine("Mammals:\t Gorilla, Cheetah, Blue Whale, Zebra, Dolphin");
+            Console.WriteLine("Reptiles:\t Alligator, Anaconda, Sea Turtle, Chameleon, Rattlesnake");
+            Console.WriteLine("Amphibians:\t Frog");
+            Console.WriteLine("Birds:\t\t Pelican, Hummingbird, Falcon, Penguin, Ostrich");
+            Console.WriteLine("Fish:\t\t Great White Shark, Clownfish, Stingray, Seahorse");
+            Console.WriteLine("Invertebrates:\t Octopus, Cuttlefish, Black Widow Spider, Starfish, Snail");
+            Console.WriteLine();
+            Console.WriteLine("ANIMAL QUALITIES");
+            Console.WriteLine();
+            Console.WriteLine("Land based, Water based");
+            Console.WriteLine("Legs, Wings, Fins, Gills, Lungs, Scales, Hair");
+            Console.WriteLine("Capable of flight, Capable of color change, Poisonous");
+            Console.WriteLine("Carnivore, Omnivore, Herbivore");
+            Console.WriteLine("Finding Nemo character");
+            Console.WriteLine();
+            Console.WriteLine("QUESTIONS YOU CAN ASK");
+            Console.WriteLine();
+            Console.WriteLine("Is it a(n) mammal(reptile, amphibian, bird, fish, invertebrate)? -- or -- mammal(reptile, amphibian, bird, fish, invertebrate)?");
+            Console.WriteLine("Is it larger than(smaller than) a Gorilla(Cheetah, Blue Whale, etc.) -- or -- larger than(smaller than) Gorilla(Cheetah, Blue Whale, etc.)");
+            Console.WriteLine("Is it faster than(slower than) a Gorilla(Cheetah, Blue Whale, etc.) -- or -- faster than(slower than) Gorilla(Cheetah, Blue Whale, etc.)");
+            Console.WriteLine("Does it have 0(2,4,5,8) legs? -- or -- 0(2,4,5,8) legs?");
+            Console.WriteLine("Does it live in water? -- or -- water?");
+            Console.WriteLine("Does it live on land? -- or -- land?");
+            Console.WriteLine("Does it have wings(fins, gills, lungs, scales, hair)? -- or -- wings(fins, gills, lungs, scales, hair)?");
+            Console.WriteLine("Can it fly(change color)? -- or -- fly(change color)?");
+            Console.WriteLine("Is it poisonous? -- or -- poisonous?");
+            Console.WriteLine("Is it a(n) carnivore(omnivore, herbivore)? -- or -- carnivore(omnivore, herbivore)?");
+            Console.WriteLine("Is it a character in Finding Nemo? -- or -- nemo?");
+            Console.WriteLine();
+            Console.WriteLine("Can you guess my favorite?");
+            Console.WriteLine("I'll give you 5 questions.");
+            Console.WriteLine("Good Luck!");
+            Console.WriteLine();
+        }
+        public static void DarwinRiddle()
+        {
+            int milliseconds = 2000;
+            int milliseconds2 = 4000;
+
+            Animal favorite = GetAnimal();
+            double favMaxSize = (favorite.Size * 1.1);
+            double favMinSize = (favorite.Size * .9);
+            double favMaxSpeed = (favorite.Speed * 1.1);
+            double favMinSpeed = (favorite.Speed * .9);
+
+            IDictionary<string, Animal> Zoo = CreateZoo();
+
+            Console.Write("Enter Question: ");
+            string question = Console.ReadLine();
+            question = question.ToLower();
+
+            //if (Zoo["Gorilla"].Size > Zoo["Cheetah"].Speed)
+            //{
+            //    Console.WriteLine("Yes");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("No");
+            //}
+
+            int count = 0;
+
+            while (count < 5)
+            {
+                if (question == "is it a mammal?" || question == "mammal?")
+                {
+                    if (favorite.Parent == "mammal")
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it a reptile?" || question == "reptile?")
+                {
+                    if (favorite.Parent == "reptile")
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it an amphibian?" || question == "amphibian?")
+                {
+                    if (favorite.Parent == "amphibian")
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it a bird?" || question == "bird?")
+                {
+                    if (favorite.Parent == "bird")
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it a fish?" || question == "fish?")
+                {
+                    if (favorite.Parent == "fish")
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it an invertebrate?" || question == "invertebrate?")
+                {
+                    if (favorite.Parent == "invertebrate")
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a gorilla?" || question == "larger than gorilla?")
+                {
+                    if (favMinSize > Zoo["Gorilla"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Gorilla"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a cheetah?" || question == "larger than cheetah?")
+                {
+                    if (favMinSize > Zoo["Cheetah"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Cheetah"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a blue whale?" || question == "larger than blue whale?")
+                {
+                    if (favMinSize > Zoo["BlueWhale"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["BlueWhale"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a zebra?" || question == "larger than zebra?")
+                {
+                    if (favMinSize > Zoo["Zebra"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Zebra"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a dolphin?" || question == "larger than dolphin?")
+                {
+                    if (favMinSize > Zoo["Dolphin"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Dolphin"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a alligator?" || question == "larger than alligator?")
+                {
+                    if (favMinSize > Zoo["Alligator"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Alligator"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a anaconda?" || question == "is it larger than an anaconda?" || question == "larger than anaconda?")
+                {
+                    if (favMinSize > Zoo["Anaconda"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Anaconda"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a sea turtle?" || question == "larger than sea turtle?")
+                {
+                    if (favMinSize > Zoo["SeaTurtle"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["SeaTurtle"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a chameleon?" || question == "larger than chameleon?")
+                {
+                    if (favMinSize > Zoo["Chameleon"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Chameleon"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a rattlesnake?" || question == "larger than rattlesnake?")
+                {
+                    if (favMinSize > Zoo["Rattlesnake"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Rattlesnake"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a frog?" || question == "larger than frog?")
+                {
+                    if (favMinSize > Zoo["Frog"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Frog"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a pelican?" || question == "larger than pelican?")
+                {
+                    if (favMinSize > Zoo["Pelican"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Pelican"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a hummingbird?" || question == "larger than hummingbird?")
+                {
+                    if (favMinSize > Zoo["Hummingbird"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Hummingbird"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a falcon?" || question == "larger than falcon?")
+                {
+                    if (favMinSize > Zoo["Falcon"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Falcon"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a penguin?" || question == "larger than penguin?")
+                {
+                    if (favMinSize > Zoo["Penguin"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Penguin"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a ostrich?" || question == "larger than ostrich?")
+                {
+                    if (favMinSize > Zoo["Ostrich"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Ostrich"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a great white shark?" || question == "larger than great white shark?")
+                {
+                    if (favMinSize > Zoo["GreatWhiteShark"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["GreatWhiteShark"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a clownfish?" || question == "larger than clownfish?")
+                {
+                    if (favMinSize > Zoo["Clownfish"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Clownfish"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a stingray?" || question == "larger than stingray?")
+                {
+                    if (favMinSize > Zoo["Stingray"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Stingray"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a seahorse?" || question == "larger than seahorse?")
+                {
+                    if (favMinSize > Zoo["Seahorse"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Seahorse"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a octopus?" || question == "larger than octopus?")
+                {
+                    if (favMinSize > Zoo["Octopus"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Octopus"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a cuttlefish?" || question == "larger than cuttlefish?")
+                {
+                    if (favMinSize > Zoo["Cuttlefish"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Cuttlefish"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a black widow spider?" || question == "larger than black widow spider?")
+                {
+                    if (favMinSize > Zoo["BlackWidowSpider"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["BlackWidowSpider"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a starfish?" || question == "larger than starfish?")
+                {
+                    if (favMinSize > Zoo["Starfish"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Starfish"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it larger than a snail?" || question == "larger than snail?")
+                {
+                    if (favMinSize > Zoo["Snail"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSize < Zoo["Snail"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a gorilla?" || question == "smaller than gorilla?")
+                {
+                    if (favMaxSize < Zoo["Gorilla"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Gorilla"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a cheetah?" || question == "smaller than cheetah?")
+                {
+                    if (favMaxSize < Zoo["Cheetah"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Cheetah"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a blue whale?" || question == "smaller than blue whale?")
+                {
+                    if (favMaxSize < Zoo["BlueWhale"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["BlueWhale"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a zebra?" || question == "smaller than zebra?")
+                {
+                    if (favMaxSize < Zoo["Zebra"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Zebra"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a dolphin?" || question == "smaller than dolphin?")
+                {
+                    if (favMaxSize < Zoo["Dolphin"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Dolphin"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a alligator?" || question == "smaller than alligator?")
+                {
+                    if (favMaxSize < Zoo["Alligator"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Alligator"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a anaconda?" || question == "is it smaller than an anaconda?" || question == "smaller than anaconda?")
+                {
+                    if (favMaxSize < Zoo["Anaconda"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Anaconda"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a sea turtle?" || question == "smaller than sea turtle?")
+                {
+                    if (favMaxSize < Zoo["SeaTurtle"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["SeaTurtle"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a chameleon?" || question == "smaller than chameleon?")
+                {
+                    if (favMaxSize < Zoo["Chameleon"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Chameleon"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a rattlesnake?" || question == "smaller than rattlesnake?")
+                {
+                    if (favMaxSize < Zoo["Rattlesnake"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Rattlesnake"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a frog?" || question == "smaller than frog?")
+                {
+                    if (favMaxSize < Zoo["Frog"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Frog"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a pelican?" || question == "smaller than pelican?")
+                {
+                    if (favMaxSize < Zoo["Pelican"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Pelican"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a hummingbird?" || question == "smaller than hummingbird?")
+                {
+                    if (favMaxSize < Zoo["Hummingbird"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Hummingbird"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a falcon?" || question == "smaller than falcon?")
+                {
+                    if (favMaxSize < Zoo["Falcon"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Falcon"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a penguin?" || question == "smaller than penguin?")
+                {
+                    if (favMaxSize < Zoo["Penguin"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Penguin"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a ostrich?" || question == "smaller than ostrich?")
+                {
+                    if (favMaxSize < Zoo["Ostrich"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Ostrich"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a great white shark?" || question == "smaller than great white shark?")
+                {
+                    if (favMaxSize < Zoo["GreatWhiteShark"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["GreatWhiteShark"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a clownfish?" || question == "smaller than clownfish?")
+                {
+                    if (favMaxSize < Zoo["Clownfish"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Clownfish"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a stingray?" || question == "smaller than stingray?")
+                {
+                    if (favMaxSize < Zoo["Stingray"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Stingray"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a seahorse?" || question == "smaller than seahorse?")
+                {
+                    if (favMaxSize < Zoo["Seahorse"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Seahorse"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a octopus?" || question == "smaller than octopus?")
+                {
+                    if (favMaxSize < Zoo["Octopus"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Octopus"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a cuttlefish?" || question == "smaller than cuttlefish?")
+                {
+                    if (favMaxSize < Zoo["Cuttlefish"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Cuttlefish"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a black widow spider?" || question == "smaller than black widow spider?")
+                {
+                    if (favMaxSize < Zoo["BlackWidowSpider"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["BlackWidowSpider"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a starfish?" || question == "smaller than starfish?")
+                {
+                    if (favMaxSize < Zoo["Starfish"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Starfish"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it smaller than a snail?" || question == "smaller than snail?")
+                {
+                    if (favMaxSize < Zoo["Snail"].Size)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSize > Zoo["Snail"].Size)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same size");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a gorilla?" || question == "faster than gorilla?")
+                {
+                    if (favMinSpeed > Zoo["Gorilla"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Gorilla"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a cheetah?" || question == "faster than cheetah?")
+                {
+                    if (favMinSpeed > Zoo["Cheetah"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Cheetah"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a blue whale?" || question == "faster than blue whale?")
+                {
+                    if (favMinSpeed > Zoo["BlueWhale"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["BlueWhale"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a zebra?" || question == "faster than zebra?")
+                {
+                    if (favMinSpeed > Zoo["Zebra"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Zebra"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a dolphin?" || question == "faster than dolphin?")
+                {
+                    if (favMinSpeed > Zoo["Dolphin"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Dolphin"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a alligator?" || question == "faster than alligator?")
+                {
+                    if (favMinSpeed > Zoo["Alligator"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Alligator"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a anaconda?" || question == "is it faster than an anaconda?" || question == "faster than anaconda?")
+                {
+                    if (favMinSpeed > Zoo["Anaconda"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Anaconda"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a sea turtle?" || question == "faster than sea turtle?")
+                {
+                    if (favMinSpeed > Zoo["SeaTurtle"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["SeaTurtle"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a chameleon?" || question == "faster than chameleon?")
+                {
+                    if (favMinSpeed > Zoo["Chameleon"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Chameleon"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a rattlesnake?" || question == "faster than rattlesnake?")
+                {
+                    if (favMinSpeed > Zoo["Rattlesnake"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Rattlesnake"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a frog?" || question == "faster than frog?")
+                {
+                    if (favMinSpeed > Zoo["Frog"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Frog"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a pelican?" || question == "faster than pelican?")
+                {
+                    if (favMinSpeed > Zoo["Pelican"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Pelican"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a hummingbird?" || question == "faster than hummingbird?")
+                {
+                    if (favMinSpeed > Zoo["Hummingbird"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Hummingbird"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a falcon?" || question == "faster than falcon?")
+                {
+                    if (favMinSpeed > Zoo["Falcon"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Falcon"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a penguin?" || question == "faster than penguin?")
+                {
+                    if (favMinSpeed > Zoo["Penguin"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Penguin"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a ostrich?" || question == "faster than ostrich?")
+                {
+                    if (favMinSpeed > Zoo["Ostrich"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Ostrich"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a great white shark?" || question == "faster than great white shark?")
+                {
+                    if (favMinSpeed > Zoo["GreatWhiteShark"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["GreatWhiteShark"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a clownfish?" || question == "faster than clownfish?")
+                {
+                    if (favMinSpeed > Zoo["Clownfish"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Clownfish"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a stingray?" || question == "faster than stingray?")
+                {
+                    if (favMinSpeed > Zoo["Stingray"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Stingray"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a seahorse?" || question == "faster than seahorse?")
+                {
+                    if (favMinSpeed > Zoo["Seahorse"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Seahorse"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a octopus?" || question == "faster than octopus?")
+                {
+                    if (favMinSpeed > Zoo["Octopus"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Octopus"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a cuttlefish?" || question == "faster than cuttlefish?")
+                {
+                    if (favMinSpeed > Zoo["Cuttlefish"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Cuttlefish"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a black widow spider?" || question == "faster than black widow spider?")
+                {
+                    if (favMinSpeed > Zoo["BlackWidowSpider"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["BlackWidowSpider"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a starfish?" || question == "faster than starfish?")
+                {
+                    if (favMinSpeed > Zoo["Starfish"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Starfish"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it faster than a snail?" || question == "faster than snail?")
+                {
+                    if (favMinSpeed > Zoo["Snail"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMaxSpeed < Zoo["Snail"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a gorilla?" || question == "slower than gorilla?")
+                {
+                    if (favMaxSpeed < Zoo["Gorilla"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Gorilla"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a cheetah?" || question == "slower than cheetah?")
+                {
+                    if (favMaxSpeed < Zoo["Cheetah"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Cheetah"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a blue whale?" || question == "slower than blue whale?")
+                {
+                    if (favMaxSpeed < Zoo["BlueWhale"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["BlueWhale"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a zebra?" || question == "slower than zebra?")
+                {
+                    if (favMaxSpeed < Zoo["Zebra"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Zebra"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a dolphin?" || question == "slower than dolphin?")
+                {
+                    if (favMaxSpeed < Zoo["Dolphin"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Dolphin"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a alligator?" || question == "slower than alligator?")
+                {
+                    if (favMaxSpeed < Zoo["Alligator"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Alligator"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a anaconda?" || question == "is it slower than an anaconda?" || question == "slower than anaconda?")
+                {
+                    if (favMaxSpeed < Zoo["Anaconda"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Anaconda"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a sea turtle?" || question == "slower than sea turtle?")
+                {
+                    if (favMaxSpeed < Zoo["SeaTurtle"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["SeaTurtle"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a chameleon?" || question == "slower than chameleon?")
+                {
+                    if (favMaxSpeed < Zoo["Chameleon"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Chameleon"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a rattlesnake?" || question == "slower than rattlesnake?")
+                {
+                    if (favMaxSpeed < Zoo["Rattlesnake"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Rattlesnake"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a frog?" || question == "slower than frog?")
+                {
+                    if (favMaxSpeed < Zoo["Frog"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Frog"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a pelican?" || question == "slower than pelican?")
+                {
+                    if (favMaxSpeed < Zoo["Pelican"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Pelican"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a hummingbird?" || question == "slower than hummingbird?")
+                {
+                    if (favMaxSpeed < Zoo["Hummingbird"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Hummingbird"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a falcon?" || question == "slower than falcon?")
+                {
+                    if (favMaxSpeed < Zoo["Falcon"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Falcon"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a penguin?" || question == "slower than penguin?")
+                {
+                    if (favMaxSpeed < Zoo["Penguin"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Penguin"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a ostrich?" || question == "slower than ostrich?")
+                {
+                    if (favMaxSpeed < Zoo["Ostrich"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Ostrich"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a great white shark?" || question == "slower than great white shark?")
+                {
+                    if (favMaxSpeed < Zoo["GreatWhiteShark"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["GreatWhiteShark"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a clownfish?" || question == "slower than clownfish?")
+                {
+                    if (favMaxSpeed < Zoo["Clownfish"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Clownfish"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a stingray?" || question == "slower than stingray?")
+                {
+                    if (favMaxSpeed < Zoo["Stingray"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Stingray"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a seahorse?" || question == "slower than seahorse?")
+                {
+                    if (favMaxSpeed < Zoo["Seahorse"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Seahorse"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a octopus?" || question == "slower than octopus?")
+                {
+                    if (favMaxSpeed < Zoo["Octopus"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Octopus"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a cuttlefish?" || question == "slower than cuttlefish?")
+                {
+                    if (favMaxSpeed < Zoo["Cuttlefish"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Cuttlefish"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a black widow spider?" || question == "slower than black widow spider?")
+                {
+                    if (favMaxSpeed < Zoo["BlackWidowSpider"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["BlackWidowSpider"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a starfish?" || question == "slower than starfish?")
+                {
+                    if (favMaxSpeed < Zoo["Starfish"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Starfish"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it slower than a snail?" || question == "slower than snail?")
+                {
+                    if (favMaxSpeed < Zoo["Snail"].Speed)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else if (favMinSpeed > Zoo["Snail"].Speed)
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("It's about the same speed");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "does it have 0 legs?" || question == "0 legs?")
+                {
+                    if (favorite.Legs == 0)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "does it have 2 legs?" || question == "2 legs?")
+                {
+                    if (favorite.Legs == 2)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "does it have 4 legs?" || question == "4 legs?")
+                {
+                    if (favorite.Legs == 4)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "does it have 5 legs?" || question == "5 legs?")
+                {
+                    if (favorite.Legs == 5)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "does it have 8 legs?" || question == "8 legs?")
+                {
+                    if (favorite.Legs == 8)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "does it live in water?" || question == "water?")
+                {
+                    if (favorite.Water == true)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "does it live on land?" || question == "land?")
+                {
+                    if (favorite.Land == true)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "does it have wings?" || question == "wings?")
+                {
+                    if (favorite.Wings == true)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "does it have fins?" || question == "fins?")
+                {
+                    if (favorite.Fins == true)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "does it have gills?" || question == "gills?")
+                {
+                    if (favorite.Gills == true)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "does it have lungs?" || question == "lungs?")
+                {
+                    if (favorite.Lungs == true)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "does it have scales?" || question == "scales?")
+                {
+                    if (favorite.Scales == true)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "does it have hair?" || question == "hair?")
+                {
+                    if (favorite.Hair == true)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "can it fly?" || question == "fly?")
+                {
+                    if (favorite.Fly == true)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "can it change color?" || question == "change color?")
+                {
+                    if (favorite.ColorChange == true)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it poisonous?" || question == "poisonous?")
+                {
+                    if (favorite.Poisonous == true)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it a carnivore?" || question == "carnivore?")
+                {
+                    if (favorite.Carnivore == true)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it an omnivore?" || question == "omnivore?")
+                {
+                    if (favorite.Omnivore == true)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it a herbivore?" || question == "is it an herbivore?" || question == "herbivore?")
+                {
+                    if (favorite.Herbivore == true)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else if (question == "is it a character in finding nemo?" || question == "nemo?")
+                {
+                    if (favorite.FindingNemo == true)
+                    {
+                        Console.WriteLine("Answer: Yes");
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Answer: No");
+                        Console.WriteLine();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("That is not an acceptable question silly. Try again.");
+                    Console.WriteLine();
+                    count--;
+                }
+
+                count++;
+                if (count != 5)
+                {
+                    Thread.Sleep(milliseconds);
+                    Console.WriteLine($"You have {5 - count} questions left.");
+                    Console.Write("Enter Question: ");
+                    question = Console.ReadLine();
+                    question = question.ToLower();
+                }
+            }
+            if (count == 5)
+            {
+                Console.WriteLine("That's all your questions! Time to guess.");
+                Thread.Sleep(milliseconds);
+                Console.WriteLine("What's my favorite animal?");
+                Console.Write("Guess: ");
+                string answer = Console.ReadLine();
+                answer = answer.ToLower();
+                Console.WriteLine();
+
+                if (answer == favorite.Name)
+                {
+                    Console.WriteLine($"Wow! You know me so well! My favoite animal is a {answer}!");
+                    Thread.Sleep(milliseconds2);
+                    Console.Clear();
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Aww man. I thought you knew me better.");
+                    Thread.Sleep(milliseconds);
+                    Console.WriteLine($"My favorite animal was the {favorite.Name}.");
+                    Thread.Sleep(milliseconds);
+                    Console.WriteLine("But now I don't like that animal anymore.");
+                    Thread.Sleep(milliseconds);
+                    Console.WriteLine("Oh, but this one over here looks really cool!");
+                    Thread.Sleep(milliseconds);
+                    Console.WriteLine("I have a new favorite animal!");
+                    Thread.Sleep(milliseconds);
+                    Console.WriteLine("Let's play again :)");
+                    Thread.Sleep(milliseconds);
+                    Console.Clear();
+
+                    DarwinRiddleNotesRepeat();
+                    DarwinRiddle();
+                }
+            }
+        }
+        public static void Outro()
+        {
+            int milliseconds = 2000;
+            int milliseconds2 = 4000;
+
+            Console.WriteLine("You solved all my riddles!");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Consider your brain thouroughly twisted.");
+            Thread.Sleep(milliseconds);
+            Console.WriteLine("Come play again sometime if your brain needs a good twisting!");
+            Thread.Sleep(milliseconds2);
+            Console.Clear();
+
+            Title();
+            Environment.Exit(0);
+        }
+    }
+}
