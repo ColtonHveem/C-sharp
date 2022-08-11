@@ -4,10 +4,10 @@ namespace BinarySearchTree
 {
     public class Node
     {
+        internal Node Root;
         internal Node Left;
         internal Node Right;
         internal Node Parent;
-        internal Node Root;
         internal bool Leaf;
         internal int Value;
         internal int Height;
@@ -17,7 +17,6 @@ namespace BinarySearchTree
             Left = null;
             Right = null;
             Parent = null;
-            Root = null;
             Leaf = true;
             Value = num;
             Height = 0;
@@ -32,13 +31,11 @@ namespace BinarySearchTree
         internal Node Parent;
         internal Node Left;
         internal Node Right;
-        internal bool Leaf;
         public int Count;
         public int TreeHeight;
         public BinarySearchTree()
         {
             Current = Parent = Left = Right = Root = null;
-            Leaf = true;
             Count = 0;
             TreeHeight = 0;
         }
@@ -47,7 +44,68 @@ namespace BinarySearchTree
         {
             return Root == null;
         }
+        public bool IsLeaf(Node p)
+        {
+            return p.Leaf;
+        }
+        public int NodeCount()
+        {
+            return this.Count;
+        }
+        public int FindTreeHeight()
+        {
+            return this.TreeHeight;
+        }
+        public void NodeQualities(Node p)
+        {
 
+            Console.WriteLine($"The value of this node is: {p.Value}");
+            Console.WriteLine($"The parent node is: {p.Parent.Value}");
+            Console.WriteLine($"The left child node is: {p.Left.Value}");
+            Console.WriteLine($"The right child node is: {p.Right.Value}");
+            if (p.Leaf == true)
+            {
+                Console.WriteLine("This node is a leaf");
+            }
+            if (p.Leaf == false)
+            {
+                Console.WriteLine("This node is not a leaf");
+            }
+            Console.WriteLine($"The height of this node is: {p.Height}");
+            Console.WriteLine($"The distance from this node to the root node is:{Root.Height - p.Height}");
+        }
+        public void SearchNode(int p)
+        {
+            if (IsEmpty())
+            {
+                Console.WriteLine("This tree is empty.");
+            }
+            else
+            {
+                Current = Root;
+
+                while(Current != null)
+                {
+                    if (Current.Value > p)
+                    {
+                        Current = Current.Left;
+                    }
+                    if (Current.Value < p)
+                    {
+                        Current = Current.Right;
+                    }
+                    if (Current.Value == p)
+                    {
+                        NodeQualities(Current);
+                        break;
+                    }
+                }
+                if(Current == null)
+                {
+                    Console.WriteLine($"{p} is not in this tree");
+                }
+            }
+        }
         public void InsertNode(int data)
         {
             Node newNode = new Node(data);
@@ -58,43 +116,55 @@ namespace BinarySearchTree
             else
             {
                 Current = Root;
+                int tmp = Count + 1;
 
-                while (Current.Value != newNode.Value)
+                while (Count != tmp)
                 {
-                    if (newNode.Value > Current.Value)
+                    while (Current.Right != newNode && Current.Left != newNode && Current.Value != newNode.Value)
                     {
-                        if (Current.Right != null)
+                        if (newNode.Value > Current.Value)
                         {
-                            Current = Current.Right;
-                        }
-                        else
-                        {
-                            Current.Right = newNode;
-                            Current.Leaf = false;
-                            newNode.Parent = Current;
-                            newNode.Leaf = true;
-                            newNode.Height = Current.Height + 1;
-                            Current = newNode;
-                        }
+                            if (Current.Right != null)
+                            {
+                                Current = Current.Right;
+                            }
+                            else
+                            {
+                                Current.Right = newNode;
+                            }
 
+                        }
+                        if (newNode.Value < Current.Value)
+                        {
+                            if (Current.Left != null)
+                            {
+                                Current = Current.Left;
+                            }
+                            else
+                            {
+                                Current.Left = newNode;
+                            }
+                        }
                     }
-                    if (newNode.Value < Current.Value)
+                    if (Current.Right == newNode || Current.Left == newNode)
                     {
-                        if (Current.Left != null)
-                        {
-                            Current = Current.Left;
-                        }
-                        else
-                        {
-                            Current.Left = newNode;
-                            Current.Leaf = false;
-                            newNode.Parent = Current;
-                            newNode.Leaf = true;
-                            newNode.Height = Current.Height + 1;
-                            Current = newNode;
-                        }
+                        Current.Leaf = false;
+                        newNode.Parent = Current;
+                        newNode.Leaf = true;
+                        newNode.Height = 0;
+                        Current = newNode;
+                        Count++;
                     }
-                    Count++;
+                    else
+                    {
+                        tmp--;
+                    }
+                }
+
+                while (Current.Parent.Height < Current.Height + 1 && Current.Parent != null)
+                {
+                    Current.Parent.Height = Current.Parent.Height + 1;
+                    Current.Parent = Current;
                 }
             }
         }
@@ -103,9 +173,9 @@ namespace BinarySearchTree
 
         }
 
-        public void Inorder(BinarySearchTree T, Node p)
+        public void Inorder(Node p)
         {
-            if (T.IsEmpty())
+            if (IsEmpty())
             {
                 Console.WriteLine("There is no data in this tree");
             }
@@ -113,42 +183,42 @@ namespace BinarySearchTree
             {
                 if (p.Left != null)
                 {
-                    Inorder(T, p.Left);
+                    Inorder(p.Left);
                 }
-                
-                Console.Write("p ");
+
+                Console.Write($"{p.Value} ");
 
                 if (p.Right != null)
                 {
-                    Inorder(T, p.Right);
+                    Inorder(p.Right);
                 }
             }
         }
-        public void Preorder(BinarySearchTree T, Node p)
+        public void Preorder(Node p)
         {
-            if (T.IsEmpty())
+            if (IsEmpty())
             {
                 Console.WriteLine("There is no data in this tree");
             }
             else
             {
-                Console.Write("p ");
-                
+                Console.Write($"{p.Value} ");
+
                 if (p.Left != null)
                 {
-                    Inorder(T, p.Left);
+                    Preorder(p.Left);
                 }
 
                 if (p.Right != null)
                 {
-                    Inorder(T, p.Right);
+                    Preorder(p.Right);
                 }
             }
         }
 
-        public void Postorder(BinarySearchTree T, Node p)
+        public void Postorder(Node p)
         {
-            if (T.IsEmpty())
+            if (IsEmpty())
             {
                 Console.WriteLine("There is no data in this tree");
             }
@@ -156,21 +226,21 @@ namespace BinarySearchTree
             {
                 if (p.Left != null)
                 {
-                    Inorder(T, p.Left);
+                    Postorder(p.Left);
                 }
 
                 if (p.Right != null)
                 {
-                    Inorder(T, p.Right);
+                    Postorder(p.Right);
                 }
 
-                Console.Write("p ");
+                Console.Write($"{p.Value} ");
             }
         }
-        public int GetTreeHeight()
-        {
-            return this.TreeHeight;
-        }
+        //public int GetTreeHeight()
+        //{
+        //    return this.TreeHeight;
+        //}
         //public int TreeHeight(BinarySearchTree T, Node p)
         //{
         //    int MaxHeight = 0;
@@ -192,7 +262,7 @@ namespace BinarySearchTree
         //    }
         //    if (p.Left != null)
         //    {
-        //        MaxHeight =  MaxHeight + TreeHeight(T, p.Left);
+        //        MaxHeight = MaxHeight + TreeHeight(T, p.Left);
         //    }
         //    if (p.Right != null)
         //    {
@@ -201,117 +271,121 @@ namespace BinarySearchTree
 
         //    return MaxHeight;
         //}
-        public int GetTreeHeight(BinarySearchTree T, Node p, int Maxheight)
-        {
+        //public int GetTreeHeight(BinarySearchTree T, Node p, int Maxheight)
+        //{
 
-            if (T.IsEmpty())
-            {
-                Console.WriteLine("There is no data in this tree");
-            }
-            if (p != Root && (p.Left == null && p.Right == null && p.Parent == null))
-            {
-                Console.WriteLine($"This node does not exist in the Binary Search Tree {T}");
-            }
-            if(p == Root)
-            {
-                Maxheight = 0;
-            }
-            if (p.Left != null)
-            {
-                TreeHeight(T, p.Left, Maxheight);
-            }
-            if (p.Right != null)
-            {
-                TreeHeight(T, p.Right, Maxheight);
-            }
-            if (p.Left == null && p.Right == null)
-            {
-                if(p.Height > Maxheight)
-                {
-                    Maxheight = p.Height;
-                }
-            }
+        //    if (T.IsEmpty())
+        //    {
+        //        Console.WriteLine("There is no data in this tree");
+        //    }
+        //    if (p != Root && (p.Left == null && p.Right == null && p.Parent == null))
+        //    {
+        //        Console.WriteLine($"This node does not exist in the Binary Search Tree {T}");
+        //    }
+        //    if (p == Root)
+        //    {
+        //        Maxheight = 0;
+        //    }
+        //    if (p.Left != null)
+        //    {
+        //        TreeHeight(T, p.Left, Maxheight);
+        //    }
+        //    if (p.Right != null)
+        //    {
+        //        TreeHeight(T, p.Right, Maxheight);
+        //    }
+        //    if (p.Left == null && p.Right == null)
+        //    {
+        //        if (p.Height > Maxheight)
+        //        {
+        //            Maxheight = p.Height;
+        //        }
+        //    }
 
-            return Maxheight;
-        }
-        public int NodeHeight(BinarySearchTree T, Node p)
-        {
-            int MaxHeight = 0;
+        //    return Maxheight;
+        //}
+        //    public int NodeHeight(BinarySearchTree T, Node p)
+        //    {
+        //        int MaxHeight = 0;
 
-            if (T.IsEmpty())
-            {
-                Console.WriteLine("There is no data in this tree");
-            }
-            if (p.Left == null && p.Right == null)
-            {
-                if (p.Height > MaxHeight)
-                {
-                    MaxHeight = p.Height;
-                }
-            }
-            if (p.Left != null)
-            {
-                TreeHeight(T, p.Left);
-            }
-            if (p.Right != null)
-            {
-                TreeHeight(T, p.Right);
-            }
-            return MaxHeight;
-        }
-        public int RootDistance(BinarySearchTree T, Node p)
-        {
-            int RootDistance = 0;
+        //        if (T.IsEmpty())
+        //        {
+        //            Console.WriteLine("There is no data in this tree");
+        //        }
+        //        if (p.Left == null && p.Right == null)
+        //        {
+        //            if (p.Height > MaxHeight)
+        //            {
+        //                MaxHeight = p.Height;
+        //            }
+        //        }
+        //        if (p.Left != null)
+        //        {
+        //            TreeHeight(T, p.Left);
+        //        }
+        //        if (p.Right != null)
+        //        {
+        //            TreeHeight(T, p.Right);
+        //        }
+        //        return MaxHeight;
+        //    }
+        //    public int RootDistance(BinarySearchTree T, Node p)
+        //    {
+        //        int RootDistance = 0;
 
-            if (T.IsEmpty())
-            {
-                Console.WriteLine("There is no data in this tree");
-            }
-            if (p.Parent != null)
-            {
-                if (p.Height > MaxHeight)
-                {
-                    MaxHeight = p.Height;
-                }
-            }
-            if (p.Left != null)
-            {
-                GetHeight(T, p.Left);
-            }
-            if (p.Right != null)
-            {
-                GetHeight(T, p.Right);
-            }
-            return MaxHeight;
-        }
+        //        if (T.IsEmpty())
+        //        {
+        //            Console.WriteLine("There is no data in this tree");
+        //        }
+        //        if (p.Parent != null)
+        //        {
+        //            if (p.Height > MaxHeight)
+        //            {
+        //                MaxHeight = p.Height;
+        //            }
+        //        }
+        //        if (p.Left != null)
+        //        {
+        //            GetHeight(T, p.Left);
+        //        }
+        //        if (p.Right != null)
+        //        {
+        //            GetHeight(T, p.Right);
+        //        }
+        //        return MaxHeight;
+        //    }
+        //}
     }
-
     class Program
     {
         static void Main(string[] args)
         {
-            BinarySearchTree list = new BinarySearchTree();
-            list.PrintList();
-            //list.RemoveLast();
-            Console.WriteLine();
-            list.AddLast(789);
-            Console.WriteLine(list.current.Value);
+            BinarySearchTree tree = new BinarySearchTree();
 
-            Console.WriteLine();
-            list.AddLast("Bob");
-            list.AddLast("John");
-            Console.WriteLine(list.current.Value);
+            Node p = new Node(11);
 
-            list.PrintList();
+            tree.InsertNode(50);
+            tree.InsertNode(25);
+            tree.InsertNode(75);
+            tree.InsertNode(60);
+            tree.InsertNode(34);
+            tree.InsertNode(11);
+            tree.InsertNode(19);
+            tree.InsertNode(72);
+            Console.WriteLine("In Order Traversal:");
+            tree.Inorder(tree.Root);
             Console.WriteLine();
-
-            list.AddStart(123);
-            Console.WriteLine(list.current.Value);
-            list.PrintList();
             Console.WriteLine();
+            Console.WriteLine("Pre Order Traversal:");
+            tree.Preorder(tree.Root);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Post Order Traversal:");
+            tree.Postorder(tree.Root);
+            Console.WriteLine();
+            Console.WriteLine();
+            tree.SearchNode(11);
 
-            list.RemoveStart();
-            list.PrintList();
         }
     }
 }
