@@ -4,11 +4,9 @@ namespace BinarySearchTree
 {
     public class Node
     {
-        internal Node Root;
         internal Node Left;
         internal Node Right;
         internal Node Parent;
-        internal bool Leaf;
         internal int Value;
         internal int Height;
 
@@ -17,10 +15,7 @@ namespace BinarySearchTree
             Left = null;
             Right = null;
             Parent = null;
-            Leaf = true;
             Value = num;
-            Height = 0;
-
         }
     }
 
@@ -28,16 +23,11 @@ namespace BinarySearchTree
     {
         internal Node Root;
         internal Node Current;
-        internal Node Parent;
-        internal Node Left;
-        internal Node Right;
         public int Count;
-        public int TreeHeight;
         public BinarySearchTree()
         {
-            Current = Parent = Left = Right = Root = null;
+            Current = Root = null;
             Count = 0;
-            TreeHeight = 0;
         }
 
         public bool IsEmpty()
@@ -46,33 +36,59 @@ namespace BinarySearchTree
         }
         public bool IsLeaf(Node p)
         {
-            return p.Leaf;
+            if (p.Left == null && p.Right == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public int NodeCount()
         {
             return this.Count;
         }
-        public int FindTreeHeight()
-        {
-            return this.TreeHeight;
-        }
+        //public int FindTreeHeight()
+        //{
+        //    return this.TreeHeight;
+        //}
         public void NodeQualities(Node p)
         {
 
             Console.WriteLine($"The value of this node is: {p.Value}");
-            Console.WriteLine($"The parent node is: {p.Parent.Value}");
-            Console.WriteLine($"The left child node is: {p.Left.Value}");
-            Console.WriteLine($"The right child node is: {p.Right.Value}");
-            if (p.Leaf == true)
+            if(p.Parent != null)
+            {
+                Console.WriteLine($"The parent node is: {p.Parent.Value}");
+            }
+            if(p.Parent == null)
+            {
+                Console.WriteLine($"The parent node is: null");
+            }
+            if (p.Left != null)
+            {
+                Console.WriteLine($"The left child node is: {p.Left.Value}");
+            }
+            if (p.Left == null)
+            {
+                Console.WriteLine($"The left child node is: null");
+            }
+            if (p.Right != null)
+            {
+                Console.WriteLine($"The right child node is: {p.Right.Value}");
+            }
+            if (p.Right == null)
+            {
+                Console.WriteLine($"The right child node is: null");
+            }
+            if (p.Right == null && p.Left == null)
             {
                 Console.WriteLine("This node is a leaf");
             }
-            if (p.Leaf == false)
+            if (p.Right != null || p.Left != null)
             {
                 Console.WriteLine("This node is not a leaf");
             }
-            Console.WriteLine($"The height of this node is: {p.Height}");
-            Console.WriteLine($"The distance from this node to the root node is:{Root.Height - p.Height}");
         }
         public void SearchNode(int p)
         {
@@ -100,6 +116,7 @@ namespace BinarySearchTree
                         break;
                     }
                 }
+
                 if(Current == null)
                 {
                     Console.WriteLine($"{p} is not in this tree");
@@ -148,9 +165,7 @@ namespace BinarySearchTree
                     }
                     if (Current.Right == newNode || Current.Left == newNode)
                     {
-                        Current.Leaf = false;
                         newNode.Parent = Current;
-                        newNode.Leaf = true;
                         newNode.Height = 0;
                         Current = newNode;
                         Count++;
@@ -161,18 +176,122 @@ namespace BinarySearchTree
                     }
                 }
 
-                while (Current.Parent.Height < Current.Height + 1 && Current.Parent != null)
+                //while (Current.Parent.Height < Current.Height + 1 && Current.Parent != null)
+                //{
+                //    Current.Parent.Height = Current.Parent.Height + 1;
+                //    Current.Parent = Current;
+                //}
+            }
+        }
+        public void DeleteNode(Node p, int trash)
+        {
+            if (IsEmpty())
+            {
+                Console.WriteLine("This tree is empty");
+                return;
+            }
+            if (p == null)
+            {
+                return;
+            }
+            if (trash < p.Value)
+            {
+                DeleteNode(p.Left, trash);
+            }
+            else if (trash > p.Value)
+            {
+                DeleteNode(p.Right, trash);
+            }
+            else
+            {
+                if (IsLeaf(p))
                 {
-                    Current.Parent.Height = Current.Parent.Height + 1;
-                    Current.Parent = Current;
+                    if (p == p.Parent.Left)
+                    {
+                        p.Parent.Left = null;
+                    }
+                    else
+                    {
+                        p.Parent.Right = null;
+                    }
+                    return;
+                }
+                else if (p.Right == null)
+                {
+                    p = p.Left;
+                    return;
+                }
+                else if (p.Left == null)
+                {
+                    p = p.Right;
+                    return;
+                }
+                else
+                {
+                    int heir = FindHeir(p);
+                    DeleteNode(p.Right, heir);
+                    DeleteNode(p.Left, heir);
+                    p.Value = heir;
                 }
             }
         }
-        public void DeleteNode(int trash)
+        private int FindHeir(Node p)
         {
-
+            if (IsEmpty())
+            {
+                Console.WriteLine("This tree is empty");
+                return -1;
+            }
+            if (IsLeaf(p))
+            {
+                Console.WriteLine("This node does not have an heir");
+                return -1;
+            }
+            else if (p.Left == null)
+            {
+                return p.Right.Value;
+            }
+            else if (p.Right == null)
+            {
+                return p.Left.Value;
+            }
+            else
+            {
+                return FindInnerHeir(p);
+            }
         }
+        private int FindInnerHeir(Node p)
+        {
+            if (p.Left.Right == null && p.Right.Left == null)
+            {
+                if (Math.Abs(p.Value - p.Left.Value) < (Math.Abs(p.Value - p.Right.Value)))
+                {
+                    return p.Left.Value;
+                }
+                else
+                {
+                    return p.Right.Value;
+                }
+            }
+            else if (p.Left.Right == null && p.Right.Left != null)
+            {
+                return p.Left.Value;
+            }
+            else if (p.Left.Right != null && p.Right.Left == null)
+            {
+                return p.Right.Value;
+            }
+            else
+            {
+                Current = p.Right.Left;
 
+                while (Current.Left != null)
+                {
+                    Current = Current.Left;
+                }
+                return Current.Value;
+            }
+        }
         public void Inorder(Node p)
         {
             if (IsEmpty())
@@ -237,124 +356,6 @@ namespace BinarySearchTree
                 Console.Write($"{p.Value} ");
             }
         }
-        //public int GetTreeHeight()
-        //{
-        //    return this.TreeHeight;
-        //}
-        //public int TreeHeight(BinarySearchTree T, Node p)
-        //{
-        //    int MaxHeight = 0;
-
-        //    if (T.IsEmpty())
-        //    {
-        //        Console.WriteLine("There is no data in this tree");
-        //    }
-        //    if (p != Root && (p.Left == null && p.Right == null && p.Parent == null))
-        //    {
-        //        Console.WriteLine($"This node does not exist in the Binary Search Tree {T}");
-        //    }
-        //    if (p.Left == null && p.Right == null)
-        //    {
-        //        if (p.Height > MaxHeight)
-        //        {
-        //            MaxHeight++;
-        //        }
-        //    }
-        //    if (p.Left != null)
-        //    {
-        //        MaxHeight = MaxHeight + TreeHeight(T, p.Left);
-        //    }
-        //    if (p.Right != null)
-        //    {
-        //        MaxHeight = MaxHeight + TreeHeight(T, p.Right);
-        //    }
-
-        //    return MaxHeight;
-        //}
-        //public int GetTreeHeight(BinarySearchTree T, Node p, int Maxheight)
-        //{
-
-        //    if (T.IsEmpty())
-        //    {
-        //        Console.WriteLine("There is no data in this tree");
-        //    }
-        //    if (p != Root && (p.Left == null && p.Right == null && p.Parent == null))
-        //    {
-        //        Console.WriteLine($"This node does not exist in the Binary Search Tree {T}");
-        //    }
-        //    if (p == Root)
-        //    {
-        //        Maxheight = 0;
-        //    }
-        //    if (p.Left != null)
-        //    {
-        //        TreeHeight(T, p.Left, Maxheight);
-        //    }
-        //    if (p.Right != null)
-        //    {
-        //        TreeHeight(T, p.Right, Maxheight);
-        //    }
-        //    if (p.Left == null && p.Right == null)
-        //    {
-        //        if (p.Height > Maxheight)
-        //        {
-        //            Maxheight = p.Height;
-        //        }
-        //    }
-
-        //    return Maxheight;
-        //}
-        //    public int NodeHeight(BinarySearchTree T, Node p)
-        //    {
-        //        int MaxHeight = 0;
-
-        //        if (T.IsEmpty())
-        //        {
-        //            Console.WriteLine("There is no data in this tree");
-        //        }
-        //        if (p.Left == null && p.Right == null)
-        //        {
-        //            if (p.Height > MaxHeight)
-        //            {
-        //                MaxHeight = p.Height;
-        //            }
-        //        }
-        //        if (p.Left != null)
-        //        {
-        //            TreeHeight(T, p.Left);
-        //        }
-        //        if (p.Right != null)
-        //        {
-        //            TreeHeight(T, p.Right);
-        //        }
-        //        return MaxHeight;
-        //    }
-        //    public int RootDistance(BinarySearchTree T, Node p)
-        //    {
-        //        int RootDistance = 0;
-
-        //        if (T.IsEmpty())
-        //        {
-        //            Console.WriteLine("There is no data in this tree");
-        //        }
-        //        if (p.Parent != null)
-        //        {
-        //            if (p.Height > MaxHeight)
-        //            {
-        //                MaxHeight = p.Height;
-        //            }
-        //        }
-        //        if (p.Left != null)
-        //        {
-        //            GetHeight(T, p.Left);
-        //        }
-        //        if (p.Right != null)
-        //        {
-        //            GetHeight(T, p.Right);
-        //        }
-        //        return MaxHeight;
-        //    }
-        //}
     }
     class Program
     {
@@ -364,6 +365,7 @@ namespace BinarySearchTree
 
             Node p = new Node(11);
 
+            Console.WriteLine(tree.IsEmpty());
             tree.InsertNode(50);
             tree.InsertNode(25);
             tree.InsertNode(75);
@@ -385,7 +387,13 @@ namespace BinarySearchTree
             Console.WriteLine();
             Console.WriteLine();
             tree.SearchNode(11);
-
+            Console.WriteLine(tree.IsEmpty());
+            tree.DeleteNode(tree.Root, 19);
+            tree.Preorder(tree.Root);
+            Console.WriteLine();
+            tree.Postorder(tree.Root);
+            Console.WriteLine();
+            tree.Inorder(tree.Root);
         }
     }
 }
