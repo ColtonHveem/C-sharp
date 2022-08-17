@@ -184,115 +184,115 @@ namespace BinarySearchTree
                 //}
             }
         }
-        public void DeleteNode(Node p, int trash)
-        {
-            if (IsEmpty())
-            {
-                Console.WriteLine("This tree is empty");
-                return;
-            }
-            if (p == null)
-            {
-                return;
-            }
-            if (trash < p.Value)
-            {
-                DeleteNode(p.Left, trash);
-            }
-            else if (trash > p.Value)
-            {
-                DeleteNode(p.Right, trash);
-            }
-            else
-            {
-                if (IsLeaf(p))
-                {
-                    if (p == p.Parent.Left)
-                    {
-                        p.Parent.Left = null;
-                    }
-                    else
-                    {
-                        p.Parent.Right = null;
-                    }
-                    return;
-                }
-                else if (p.Right == null)
-                {
-                    p = p.Left;
-                    return;
-                }
-                else if (p.Left == null)
-                {
-                    p = p.Right;
-                    return;
-                }
-                else
-                {
-                    int heir = FindHeir(p);
-                    DeleteNode(p.Right, heir);
-                    DeleteNode(p.Left, heir);
-                    p.Value = heir;
-                }
-            }
-        }
-        private int FindHeir(Node p)
-        {
-            if (IsEmpty())
-            {
-                Console.WriteLine("This tree is empty");
-                return -1;
-            }
-            if (IsLeaf(p))
-            {
-                Console.WriteLine("This node does not have an heir");
-                return -1;
-            }
-            else if (p.Left == null)
-            {
-                return p.Right.Value;
-            }
-            else if (p.Right == null)
-            {
-                return p.Left.Value;
-            }
-            else
-            {
-                return FindInnerHeir(p);
-            }
-        }
-        private int FindInnerHeir(Node p)
-        {
-            if (p.Left.Right == null && p.Right.Left == null)
-            {
-                if (Math.Abs(p.Value - p.Left.Value) < (Math.Abs(p.Value - p.Right.Value)))
-                {
-                    return p.Left.Value;
-                }
-                else
-                {
-                    return p.Right.Value;
-                }
-            }
-            else if (p.Left.Right == null && p.Right.Left != null)
-            {
-                return p.Left.Value;
-            }
-            else if (p.Left.Right != null && p.Right.Left == null)
-            {
-                return p.Right.Value;
-            }
-            else
-            {
-                Current = p.Right.Left;
+        //public void DeleteNode(Node p, int trash)
+        //{
+        //    if (IsEmpty())
+        //    {
+        //        Console.WriteLine("This tree is empty");
+        //        return;
+        //    }
+        //    if (p == null)
+        //    {
+        //        return;
+        //    }
+        //    if (trash < p.Value)
+        //    {
+        //        DeleteNode(p.Left, trash);
+        //    }
+        //    else if (trash > p.Value)
+        //    {
+        //        DeleteNode(p.Right, trash);
+        //    }
+        //    else
+        //    {
+        //        if (IsLeaf(p))
+        //        {
+        //            if (p == p.Parent.Left)
+        //            {
+        //                p.Parent.Left = null;
+        //            }
+        //            else
+        //            {
+        //                p.Parent.Right = null;
+        //            }
+        //            return;
+        //        }
+        //        else if (p.Right == null)
+        //        {
+        //            p = p.Left;
+        //            return;
+        //        }
+        //        else if (p.Left == null)
+        //        {
+        //            p = p.Right;
+        //            return;
+        //        }
+        //        else
+        //        {
+        //            int heir = FindHeir(p);
+        //            DeleteNode(p.Right, heir);
+        //            DeleteNode(p.Left, heir);
+        //            p.Value = heir;
+        //        }
+        //    }
+        //}
+        //private int FindHeir(Node p)
+        //{
+        //    if (IsEmpty())
+        //    {
+        //        Console.WriteLine("This tree is empty");
+        //        return -1;
+        //    }
+        //    if (IsLeaf(p))
+        //    {
+        //        Console.WriteLine("This node does not have an heir");
+        //        return -1;
+        //    }
+        //    else if (p.Left == null)
+        //    {
+        //        return p.Right.Value;
+        //    }
+        //    else if (p.Right == null)
+        //    {
+        //        return p.Left.Value;
+        //    }
+        //    else
+        //    {
+        //        return FindInnerHeir(p);
+        //    }
+        //}
+        //private int FindInnerHeir(Node p)
+        //{
+        //    if (p.Left.Right == null && p.Right.Left == null)
+        //    {
+        //        if (Math.Abs(p.Value - p.Left.Value) < (Math.Abs(p.Value - p.Right.Value)))
+        //        {
+        //            return p.Left.Value;
+        //        }
+        //        else
+        //        {
+        //            return p.Right.Value;
+        //        }
+        //    }
+        //    else if (p.Left.Right == null && p.Right.Left != null)
+        //    {
+        //        return p.Left.Value;
+        //    }
+        //    else if (p.Left.Right != null && p.Right.Left == null)
+        //    {
+        //        return p.Right.Value;
+        //    }
+        //    else
+        //    {
+        //        Current = p.Right.Left;
 
-                while (Current.Left != null)
-                {
-                    Current = Current.Left;
-                }
-                return Current.Value;
-            }
-        }
+        //        while (Current.Left != null)
+        //        {
+        //            Current = Current.Left;
+        //        }
+        //        return Current.Value;
+        //    }
+        //}
         public void Inorder(Node p)
         {
             if (IsEmpty())
@@ -419,8 +419,8 @@ namespace BinarySearchTree
             Node ParentofHeir = p;
             Node heir = p;
             Current = p.Right;
-            
-            while(Current != null)
+
+            while (Current != null)
             {
                 ParentofHeir = heir;
                 heir = Current;
@@ -446,8 +446,8 @@ namespace BinarySearchTree
             else
             {
                 Current = Root;
-                
-                while(Current.Left != null)
+
+                while (Current.Left != null)
                 {
                     Current = Current.Left;
                 }
@@ -481,7 +481,7 @@ namespace BinarySearchTree
             }
             else
             {
-                if(p.Left == null && p.Right == null)
+                if (p.Left == null && p.Right == null)
                 {
                     return 1;
                 }
@@ -489,11 +489,11 @@ namespace BinarySearchTree
                 int leftleaves = 0;
                 int rightleaves = 0;
 
-                if(p.Left != null)
+                if (p.Left != null)
                 {
                     leftleaves = TotalLeaves(p.Left);
                 }
-                if(p.Right != null)
+                if (p.Right != null)
                 {
                     rightleaves = TotalLeaves(p.Right);
                 }
@@ -509,7 +509,7 @@ namespace BinarySearchTree
             }
             else
             {
-                if(p.Left == null && p.Right == null)
+                if (p.Left == null && p.Right == null)
                 {
                     return 1;
                 }
@@ -517,11 +517,11 @@ namespace BinarySearchTree
                 int leftheight = 0;
                 int rightheight = 0;
 
-                if(p.Left != null)
+                if (p.Left != null)
                 {
                     leftheight = TreeHeight(p.Left);
                 }
-                if(p.Right != null)
+                if (p.Right != null)
                 {
                     rightheight = TreeHeight(p.Right);
                 }
@@ -588,7 +588,10 @@ namespace BinarySearchTree
 
             Node p = new Node(11);
 
+
+            Console.Write("Binary Search Tree is empty, true or false: ");
             Console.WriteLine(tree.IsEmpty());
+            Console.WriteLine();
             tree.InsertNode(50);
             tree.InsertNode(25);
             tree.InsertNode(75);
@@ -597,6 +600,11 @@ namespace BinarySearchTree
             tree.InsertNode(11);
             tree.InsertNode(19);
             tree.InsertNode(72);
+            tree.InsertNode(41);
+            tree.InsertNode(7);
+            tree.InsertNode(68);
+            tree.InsertNode(53);
+            tree.InsertNode(36);
             Console.WriteLine("In Order Traversal:");
             tree.Inorder(tree.Root);
             Console.WriteLine();
@@ -609,14 +617,9 @@ namespace BinarySearchTree
             tree.Postorder(tree.Root);
             Console.WriteLine();
             Console.WriteLine();
+            Console.WriteLine("The qualities of node with value 11 are: ");
+            Console.WriteLine();
             tree.SearchNode(11);
-            //Console.WriteLine(tree.IsEmpty());
-            //tree.DeleteNode(tree.Root, 19);
-            //tree.Preorder(tree.Root);
-            //Console.WriteLine();
-            //tree.Postorder(tree.Root);
-            //Console.WriteLine();
-            //tree.Inorder(tree.Root);
             Console.WriteLine();
             Console.Write("The Maximum Value in the tree is: ");
             Console.WriteLine(tree.FindMax());
@@ -634,6 +637,9 @@ namespace BinarySearchTree
             tree.DeleteNode(19);
             tree.DeleteNode(11);
             tree.Postorder(tree.Root);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.Write("Total number of leaves in the tree: ");
             Console.WriteLine(tree.TotalLeaves(tree.Root));
             Console.WriteLine();
             Console.Write("The height of the tree is: ");
